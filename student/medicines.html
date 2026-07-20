@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Medicines | AlagaGo Clinic</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="../css/master.css">
+  <script src="/session-guard.js"></script>
+
+</head>
+<body>
+<div class="app">
+  <!-- ===== Sidebar ===== -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <div class="brand-icon"><i class="fa-solid fa-staff-snake"></i></div>
+      <div class="brand-text"><strong>AlagaGo</strong><small>Student Portal</small></div>
+    </div>
+    <nav class="sidebar-nav">
+      <span class="nav-label">Main</span>
+        <a href="index.html" class="nav-link"><i class="fa-solid fa-gauge-high"></i><span>Dashboard</span></a>
+      <span class="nav-label">Health</span>
+        <a href="records.html" class="nav-link"><i class="fa-solid fa-file-medical"></i><span>My Medical Record</span></a>
+        <a href="medicines.html" class="nav-link"><i class="fa-solid fa-capsules"></i><span>My Medicines</span></a>
+        <a href="clearance.html" class="nav-link"><i class="fa-solid fa-file-circle-check"></i><span>Health Clearance</span></a>
+      <span class="nav-label">Services</span>
+        <a href="appointments.html" class="nav-link"><i class="fa-solid fa-calendar-check"></i><span>Appointments</span></a>
+        <a href="incidents.html" class="nav-link"><i class="fa-solid fa-file-circle-exclamation"></i><span>Incident History</span></a>
+        <a href="programs.html" class="nav-link"><i class="fa-solid fa-heart-pulse"></i><span>Health Programs</span></a>
+      <span class="nav-label">Account</span>
+        <a href="profile.html" class="nav-link"><i class="fa-solid fa-user"></i><span>My Profile</span></a>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="#" onclick="logout(); return false;" class="dropdown-item text-danger">
+        <i class="fa-solid fa-arrow-right-from-bracket"></i> Log Out
+      </a>
+    </div>
+  </aside>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+  <!-- ===== Main ===== -->
+  <div class="main">
+  <!-- ===== Topbar ===== -->
+  <header class="topbar">
+    <button class="icon-btn" id="sidebarToggle"><i class="fa-solid fa-bars"></i></button>
+    <div class="search-box">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <input type="text" placeholder="Search medicines..." data-table-search="mainTable">
+    </div>
+    <div class="topbar-actions">
+      <div class="dropdown">
+        <button class="icon-btn" data-dropdown-toggle="notifDropdown"><i class="fa-solid fa-bell"></i><span class="dot"></span></button>
+        <div class="dropdown-menu dropdown-menu-wide" id="notifDropdown">
+          <div class="dropdown-head">Notifications</div>
+          <a href="#" class="dropdown-item"><i class="fa-solid fa-calendar-check"></i> New appointment booked</a>
+          <a href="#" class="dropdown-item"><i class="fa-solid fa-pills"></i> Low stock alert: Paracetamol</a>
+          <a href="#" class="dropdown-item"><i class="fa-solid fa-file-circle-check"></i> 3 clearance requests pending</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button class="user-chip" data-dropdown-toggle="userDropdown">
+          <span class="avatar">MC</span>
+          <span class="user-meta"><strong>Maria Clara</strong><small>Student - BSIT 3rd Year</small></span>
+          <i class="fa-solid fa-chevron-down"></i>
+        </button>
+        <div class="dropdown-menu" id="userDropdown">
+          <a href="profile.html" class="dropdown-item"><i class="fa-solid fa-user"></i> My Profile</a>
+          <a href="#" class="dropdown-item"><i class="fa-solid fa-gear"></i> Preferences</a>
+          <div class="dropdown-divider"></div>
+          <a href="#" onclick="logout(); return false;" class="dropdown-item text-danger">
+        <i class="fa-solid fa-arrow-right-from-bracket"></i> Log Out
+      </a>
+        </div>
+      </div>
+    </div>
+  </header>
+    <main class="content">
+
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">My Medicines</h1>
+          <p class="page-subtitle">Your current prescriptions and medication history.</p>
+        </div>
+      </div>
+
+      <!-- Current prescriptions -->
+      <div class="card">
+        <div class="card-header"><h3 class="card-title"><i class="fa-solid fa-capsules"></i> Currently Prescribed</h3></div>
+        <div class="card-body">
+          <div class="grid-3">
+            <div class="med-card">
+              <h4><i class="fa-solid fa-pills" style="color:var(--primary)"></i> Cetirizine 10mg</h4>
+              <p class="dose"><i class="fa-solid fa-clock"></i> Once daily at bedtime</p>
+              <p class="dose"><i class="fa-solid fa-user-doctor"></i> Dr. Sarah Reyes</p>
+              <p class="dose"><i class="fa-solid fa-calendar"></i> Until Mar 15, 2025</p>
+              <span class="badge badge-warning">Take after meals</span>
+            </div>
+            <div class="med-card">
+              <h4><i class="fa-solid fa-pills" style="color:var(--primary)"></i> Ibuprofen 400mg</h4>
+              <p class="dose"><i class="fa-solid fa-clock"></i> Every 8 hours as needed</p>
+              <p class="dose"><i class="fa-solid fa-user-doctor"></i> Dr. Sarah Reyes</p>
+              <p class="dose"><i class="fa-solid fa-calendar"></i> Until Mar 13, 2025</p>
+              <span class="badge badge-info">For pain / headache</span>
+            </div>
+            <div class="med-card">
+              <h4><i class="fa-solid fa-pump-medical" style="color:var(--primary)"></i> Salbutamol Inhaler</h4>
+              <p class="dose"><i class="fa-solid fa-clock"></i> 2 puffs as needed</p>
+              <p class="dose"><i class="fa-solid fa-user-doctor"></i> Dr. Michael Tan</p>
+              <p class="dose"><i class="fa-solid fa-calendar"></i> Until Jun 2025</p>
+              <span class="badge badge-purple">For asthma relief</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- History -->
+      <div class="card">
+        <div class="card-header"><h3 class="card-title"><i class="fa-solid fa-clock-rotate-left"></i> Medication History</h3></div>
+        <div class="table-wrap">
+          <table class="table" id="mainTable">
+            <thead><tr><th>Medicine</th><th>Dosage</th><th>Prescribed By</th><th>Date</th><th>Duration</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr><td class="fw-bold">Cetirizine 10mg</td><td>1 tab daily</td><td>Dr. Sarah Reyes</td><td>Mar 08, 2025</td><td>7 days</td><td><span class="badge badge-success">Ongoing</span></td></tr>
+              <tr><td class="fw-bold">Ibuprofen 400mg</td><td>1 tab every 8 hrs</td><td>Dr. Sarah Reyes</td><td>Mar 08, 2025</td><td>5 days</td><td><span class="badge badge-success">Ongoing</span></td></tr>
+              <tr><td class="fw-bold">Paracetamol 500mg</td><td>1 tab every 6 hrs</td><td>Dr. Sarah Reyes</td><td>Feb 10, 2025</td><td>3 days</td><td><span class="badge badge-secondary">Completed</span></td></tr>
+              <tr><td class="fw-bold">Mefenamic Acid 500mg</td><td>1 cap every 8 hrs</td><td>Dr. Michael Tan</td><td>Jan 28, 2025</td><td>4 days</td><td><span class="badge badge-secondary">Completed</span></td></tr>
+              <tr><td class="fw-bold">Oral Rehydration Salts</td><td>1 sachet per loose stool</td><td>Nurse Grace Lim</td><td>Dec 12, 2024</td><td>2 days</td><td><span class="badge badge-secondary">Completed</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+<script src="../js/master.js"></script>
+</body>
+</html>

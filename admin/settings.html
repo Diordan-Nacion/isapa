@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>System Settings | AlagaGo Clinic</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="../css/master.css">
+  <script src="/session-guard.js"></script>
+  
+</head>
+<body>
+<div class="app">
+  <!-- ===== Sidebar ===== -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <div class="brand-icon"><i class="fa-solid fa-staff-snake"></i></div>
+      <div class="brand-text"><strong>AlagaGo</strong><small>Admin Panel</small></div>
+    </div>
+    <nav class="sidebar-nav">
+      <span class="nav-label">Main</span>
+        <a href="index.html" class="nav-link"><i class="fa-solid fa-gauge-high"></i><span>Dashboard</span></a>
+      <span class="nav-label">Management</span>
+        <a href="users.html" class="nav-link"><i class="fa-solid fa-users-gear"></i><span>User Management</span></a>
+        <a href="records.html" class="nav-link"><i class="fa-solid fa-file-medical"></i><span>Medical Records</span></a>
+        <a href="consultations.html" class="nav-link"><i class="fa-solid fa-stethoscope"></i><span>Consultations</span></a>
+        <a href="appointments.html" class="nav-link"><i class="fa-solid fa-calendar-check"></i><span>Appointments</span></a>
+      <span class="nav-label">Pharmacy</span>
+        <a href="inventory.html" class="nav-link"><i class="fa-solid fa-pills"></i><span>Medicine Inventory</span></a>
+        <a href="dispensing.html" class="nav-link"><i class="fa-solid fa-prescription-bottle-medical"></i><span>Dispensing</span></a>
+      <span class="nav-label">Services</span>
+        <a href="emergency.html" class="nav-link"><i class="fa-solid fa-truck-medical"></i><span>Incident & Emergency</span></a>
+        <a href="programs.html" class="nav-link"><i class="fa-solid fa-heart-pulse"></i><span>Health Programs</span></a>
+        <a href="clearance.html" class="nav-link"><i class="fa-solid fa-file-circle-check"></i><span>Health Clearance</span></a>
+      <span class="nav-label">System</span>
+        <a href="reports.html" class="nav-link"><i class="fa-solid fa-chart-line"></i><span>Reports</span></a>
+        <a href="settings.html" class="nav-link"><i class="fa-solid fa-gear"></i><span>Settings</span></a>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="#" onclick="logout(); return false;" class="dropdown-item text-danger">
+        <i class="fa-solid fa-arrow-right-from-bracket"></i> Log Out
+      </a>
+    </div>
+  </aside>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+  <!-- ===== Main ===== -->
+  <div class="main">
+  <!-- ===== Topbar ===== -->
+  <header class="topbar">
+    <button class="icon-btn" id="sidebarToggle"><i class="fa-solid fa-bars"></i></button>
+    <div class="search-box">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <input type="text" placeholder="Search..." data-table-search="mainTable">
+    </div>
+    <div class="topbar-actions">
+      <div class="dropdown">
+        <button class="icon-btn" data-dropdown-toggle="notifDropdown"><i class="fa-solid fa-bell"></i><span class="dot"></span></button>
+        <div class="dropdown-menu dropdown-menu-wide" id="notifDropdown">
+          <div class="dropdown-head">Notifications</div>
+          <a href="#" class="dropdown-item"><i class="fa-solid fa-calendar-check"></i> New appointment booked</a>
+          <a href="#" class="dropdown-item"><i class="fa-solid fa-pills"></i> Low stock alert: Paracetamol</a>
+          <a href="#" class="dropdown-item"><i class="fa-solid fa-file-circle-check"></i> 3 clearance requests pending</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button class="user-chip" data-dropdown-toggle="userDropdown">
+          <span class="avatar">AD</span>
+          <span class="user-meta"><strong>Admin User</strong><small>Administrator</small></span>
+          <i class="fa-solid fa-chevron-down"></i>
+        </button>
+        <div class="dropdown-menu" id="userDropdown">
+          <a href="settings.html" class="dropdown-item"><i class="fa-solid fa-user"></i> My Profile</a>
+          <a href="#" class="dropdown-item"><i class="fa-solid fa-gear"></i> Preferences</a>
+          <div class="dropdown-divider"></div>
+          <a href="#" onclick="logout(); return false;" class="dropdown-item text-danger">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i> Log Out
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+    <main class="content">
+
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">System Settings</h1>
+          <p class="page-subtitle">Configure clinic information, schedule, and preferences.</p>
+        </div>
+      </div>
+
+      <div class="tabs">
+        <button class="tab-btn active" data-tab="info"><i class="fa-solid fa-house-medical"></i> Clinic Info</button>
+        <button class="tab-btn" data-tab="hours"><i class="fa-solid fa-clock"></i> Operating Hours</button>
+        <button class="tab-btn" data-tab="notif"><i class="fa-solid fa-bell"></i> Notifications</button>
+        <button class="tab-btn" data-tab="security"><i class="fa-solid fa-shield-halved"></i> Security</button>
+      </div>
+
+      <!-- Clinic Info -->
+      <div class="tab-panel active" data-tab-panel="info">
+        <div class="card">
+          <div class="card-body">
+            <form class="js-demo-form" data-toast="Clinic information saved">
+              <div class="form-row">
+                <div class="form-group"><label class="form-label">Clinic Name</label><input type="text" class="form-control" value="CampusCare University Clinic"></div>
+                <div class="form-group"><label class="form-label">Email Address</label><input type="email" class="form-control" value="clinic@campuscare.edu"></div>
+              </div>
+              <div class="form-row">
+                <div class="form-group"><label class="form-label">Contact Number</label><input type="text" class="form-control" value="(02) 8123 4567"></div>
+                <div class="form-group"><label class="form-label">Emergency Hotline</label><input type="text" class="form-control" value="0917 123 4567"></div>
+              </div>
+              <div class="form-group"><label class="form-label">Address</label><input type="text" class="form-control" value="Ground Floor, Administration Building, Campus Drive"></div>
+              <div class="form-group"><label class="form-label">Description</label><textarea class="form-control">Providing primary healthcare services to students, faculty, and staff.</textarea></div>
+              <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Save Changes</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- Operating Hours -->
+      <div class="tab-panel" data-tab-panel="hours">
+        <div class="card">
+          <div class="card-body">
+            <form class="js-demo-form" data-toast="Operating hours updated">
+              <div class="hours-row"><span class="day">Monday</span><input type="time" class="form-control" value="08:00"><input type="time" class="form-control" value="17:00"><input type="checkbox" class="switch" checked></div>
+              <div class="hours-row"><span class="day">Tuesday</span><input type="time" class="form-control" value="08:00"><input type="time" class="form-control" value="17:00"><input type="checkbox" class="switch" checked></div>
+              <div class="hours-row"><span class="day">Wednesday</span><input type="time" class="form-control" value="08:00"><input type="time" class="form-control" value="17:00"><input type="checkbox" class="switch" checked></div>
+              <div class="hours-row"><span class="day">Thursday</span><input type="time" class="form-control" value="08:00"><input type="time" class="form-control" value="17:00"><input type="checkbox" class="switch" checked></div>
+              <div class="hours-row"><span class="day">Friday</span><input type="time" class="form-control" value="08:00"><input type="time" class="form-control" value="17:00"><input type="checkbox" class="switch" checked></div>
+              <div class="hours-row"><span class="day">Saturday</span><input type="time" class="form-control" value="08:00"><input type="time" class="form-control" value="12:00"><input type="checkbox" class="switch" checked></div>
+              <div class="hours-row"><span class="day">Sunday</span><input type="time" class="form-control" value="08:00"><input type="time" class="form-control" value="12:00"><input type="checkbox" class="switch"></div>
+              <button type="submit" class="btn btn-primary mt-2"><i class="fa-solid fa-floppy-disk"></i> Save Hours</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- Notifications -->
+      <div class="tab-panel" data-tab-panel="notif">
+        <div class="card">
+          <div class="card-body">
+            <form class="js-demo-form" data-toast="Notification preferences saved">
+              <div class="setting-row"><div><strong>Email notifications</strong><small>Receive an email for every new appointment booking.</small></div><input type="checkbox" class="switch" checked></div>
+              <div class="setting-row"><div><strong>SMS emergency alerts</strong><small>Send SMS to on-duty staff during emergency incidents.</small></div><input type="checkbox" class="switch" checked></div>
+              <div class="setting-row"><div><strong>Low stock alerts</strong><small>Notify when medicine stock falls below reorder level.</small></div><input type="checkbox" class="switch" checked></div>
+              <div class="setting-row"><div><strong>Appointment reminders</strong><small>Send reminders to patients 24 hours before schedule.</small></div><input type="checkbox" class="switch"></div>
+              <div class="setting-row"><div><strong>Weekly summary report</strong><small>Email a weekly clinic activity summary every Monday.</small></div><input type="checkbox" class="switch" checked></div>
+              <button type="submit" class="btn btn-primary mt-2"><i class="fa-solid fa-floppy-disk"></i> Save Preferences</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- Security -->
+      <div class="tab-panel" data-tab-panel="security">
+        <div class="card">
+          <div class="card-body">
+            <form class="js-demo-form" data-toast="Security settings updated">
+              <div class="form-group"><label class="form-label">Current Password</label><input type="password" class="form-control" placeholder="Enter current password"></div>
+              <div class="form-row">
+                <div class="form-group"><label class="form-label">New Password</label><input type="password" class="form-control" placeholder="Enter new password"></div>
+                <div class="form-group"><label class="form-label">Confirm Password</label><input type="password" class="form-control" placeholder="Re-enter new password"></div>
+              </div>
+              <div class="form-group"><label class="form-label">Session Timeout</label>
+                <select class="form-control"><option>15 minutes</option><option selected>30 minutes</option><option>1 hour</option><option>2 hours</option></select>
+              </div>
+              <div class="setting-row"><div><strong>Two-factor authentication</strong><small>Require a verification code on every login.</small></div><input type="checkbox" class="switch"></div>
+              <button type="submit" class="btn btn-primary mt-2"><i class="fa-solid fa-shield-halved"></i> Update Security</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+<script src="../js/master.js"></script>
+</body>
+</html>

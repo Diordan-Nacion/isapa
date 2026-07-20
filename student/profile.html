@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Profile | AlagaGo Clinic</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="../css/master.css">
+  <script src="/session-guard.js"></script>
+
+</head>
+<body>
+<div class="app">
+  <!-- ===== Sidebar ===== -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <div class="brand-icon"><i class="fa-solid fa-staff-snake"></i></div>
+      <div class="brand-text"><strong>AlagaGo</strong><small>Student Portal</small></div>
+    </div>
+    <nav class="sidebar-nav">
+      <span class="nav-label">Main</span>
+        <a href="index.html" class="nav-link"><i class="fa-solid fa-gauge-high"></i><span>Dashboard</span></a>
+      <span class="nav-label">Health</span>
+        <a href="records.html" class="nav-link"><i class="fa-solid fa-file-medical"></i><span>My Medical Record</span></a>
+        <a href="medicines.html" class="nav-link"><i class="fa-solid fa-capsules"></i><span>My Medicines</span></a>
+        <a href="clearance.html" class="nav-link"><i class="fa-solid fa-file-circle-check"></i><span>Health Clearance</span></a>
+      <span class="nav-label">Services</span>
+        <a href="appointments.html" class="nav-link"><i class="fa-solid fa-calendar-check"></i><span>Appointments</span></a>
+        <a href="incidents.html" class="nav-link"><i class="fa-solid fa-file-circle-exclamation"></i><span>Incident History</span></a>
+        <a href="programs.html" class="nav-link"><i class="fa-solid fa-heart-pulse"></i><span>Health Programs</span></a>
+      <span class="nav-label">Account</span>
+        <a href="profile.html" class="nav-link"><i class="fa-solid fa-user"></i><span>My Profile</span></a>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="#" onclick="logout(); return false;" class="dropdown-item text-danger">
+        <i class="fa-solid fa-arrow-right-from-bracket"></i> Log Out
+      </a>
+    </div>
+  </aside>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+  <!-- ===== Main ===== -->
+  <div class="main">
+  <!-- ===== Topbar ===== -->
+  <header class="topbar">
+    <button class="icon-btn" id="sidebarToggle"><i class="fa-solid fa-bars"></i></button>
+    <div class="search-box">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <input type="text" placeholder="Search..." data-table-search="mainTable">
+    </div>
+    <div class="topbar-actions">
+      <div class="dropdown">
+        <button class="icon-btn" data-dropdown-toggle="notifDropdown"><i class="fa-solid fa-bell"></i><span class="dot"></span></button>
+        <div class="dropdown-menu dropdown-menu-wide" id="notifDropdown">
+          <div class="dropdown-head">Notifications</div>
+          <a href="#" class="dropdown-item"><i class="fa-solid fa-calendar-check"></i> New appointment booked</a>
+          <a href="#" class="dropdown-item"><i class="fa-solid fa-pills"></i> Low stock alert: Paracetamol</a>
+          <a href="#" class="dropdown-item"><i class="fa-solid fa-file-circle-check"></i> 3 clearance requests pending</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button class="user-chip" data-dropdown-toggle="userDropdown">
+          <span class="avatar">KG</span>
+          <span class="user-meta"><strong>Kenji Gorgod</strong><small>Student - BSIT 3rd Year</small></span>
+          <i class="fa-solid fa-chevron-down"></i>
+        </button>
+        <div class="dropdown-menu" id="userDropdown">
+          <a href="profile.html" class="dropdown-item"><i class="fa-solid fa-user"></i> My Profile</a>
+          <a href="#" class="dropdown-item"><i class="fa-solid fa-gear"></i> Preferences</a>
+          <div class="dropdown-divider"></div>
+          <a href="#" onclick="logout(); return false;" class="dropdown-item text-danger">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i> Log Out
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+    <main class="content">
+
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">My Profile</h1>
+          <p class="page-subtitle">Manage your personal information and account security.</p>
+        </div>
+      </div>
+
+      <!-- Profile header -->
+      <div class="card">
+        <div class="card-body">
+          <div class="profile-header">
+            <span class="avatar avatar-lg">KG</span>
+            <div>
+              <h2>Kenji Gorgod</h2>
+              <p class="sub">STU-2024-056 &middot; BSIT 3rd Year</p>
+              <div class="d-flex mt-1" style="flex-wrap:wrap">
+                <span class="badge badge-teal"><i class="fa-solid fa-droplet"></i> Blood Type: O+</span>
+                <span class="badge badge-danger"><i class="fa-solid fa-triangle-exclamation"></i> Allergy: Penicillin</span>
+              </div>
+            </div>
+            <button class="btn btn-outline btn-sm" style="margin-left:auto" data-toast="Photo upload opened" data-toast-type="info"><i class="fa-solid fa-camera"></i> Change Photo</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <!-- Personal info -->
+        <div class="card">
+          <div class="card-header"><h3 class="card-title"><i class="fa-solid fa-user"></i> Personal Information</h3></div>
+          <div class="card-body">
+            <form class="js-demo-form" data-toast="Profile updated successfully">
+              <div class="form-row">
+                <div class="form-group"><label class="form-label">First Name</label><input type="text" class="form-control" value="Kenji"></div>
+                <div class="form-group"><label class="form-label">Last Name</label><input type="text" class="form-control" value="Gorgod"></div>
+              </div>
+              <div class="form-row">
+                <div class="form-group"><label class="form-label">Student ID</label><input type="text" class="form-control" value="STU-2024-056" readonly></div>
+                <div class="form-group"><label class="form-label">Course &amp; Year</label><input type="text" class="form-control" value="BSIT 3rd Year" readonly></div>
+              </div>
+              <div class="form-row">
+                <div class="form-group"><label class="form-label">Birthdate</label><input type="date" class="form-control" value="2004-06-12"></div>
+                <div class="form-group"><label class="form-label">Gender</label>
+                  <select class="form-control"><option selected>Female</option><option>Male</option><option>Other</option></select>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group"><label class="form-label">Email</label><input type="email" class="form-control" value="gorgod.kenji@student.edu"></div>
+                <div class="form-group"><label class="form-label">Phone</label><input type="text" class="form-control" value="0917 555 0198"></div>
+              </div>
+              <div class="form-group"><label class="form-label">Address</label><input type="text" class="form-control" value="Blk 7 Lot 3, Mabini St., Manila"></div>
+              <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Save Changes</button>
+            </form>
+          </div>
+        </div>
+
+        <div>
+          <!-- Emergency contact -->
+          <div class="card">
+            <div class="card-header"><h3 class="card-title"><i class="fa-solid fa-phone"></i> Emergency Contact</h3></div>
+            <div class="card-body">
+              <form class="js-demo-form" data-toast="Emergency contact saved">
+                <div class="form-row">
+                  <div class="form-group"><label class="form-label">Contact Name</label><input type="text" class="form-control" value="Rosa Gorgod"></div>
+                  <div class="form-group"><label class="form-label">Relationship</label><input type="text" class="form-control" value="Mother"></div>
+                </div>
+                <div class="form-group"><label class="form-label">Contact Number</label><input type="text" class="form-control" value="0917 555 0132"></div>
+                <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Save Contact</button>
+              </form>
+            </div>
+          </div>
+
+          <!-- Change password -->
+          <div class="card">
+            <div class="card-header"><h3 class="card-title"><i class="fa-solid fa-lock"></i> Change Password</h3></div>
+            <div class="card-body">
+              <form class="js-demo-form" data-toast="Password updated successfully">
+                <div class="form-group"><label class="form-label">Current Password</label><input type="password" class="form-control" placeholder="Enter current password" required></div>
+                <div class="form-row">
+                  <div class="form-group"><label class="form-label">New Password</label><input type="password" class="form-control" placeholder="Enter new password" required></div>
+                  <div class="form-group"><label class="form-label">Confirm Password</label><input type="password" class="form-control" placeholder="Re-enter new password" required></div>
+                </div>
+                <button type="submit" class="btn btn-primary"><i class="fa-solid fa-key"></i> Update Password</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+<script src="../js/master.js"></script>
+</body>
+</html>

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Management | AlagaGo Clinic</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="../css/master.css">
+  <script src="/session-guard.js"></script>
+  
+</head>
+<body>
+<div class="app">
+  <!-- ===== Sidebar ===== -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <div class="brand-icon"><i class="fa-solid fa-staff-snake"></i></div>
+      <div class="brand-text"><strong>AlagaGo</strong><small>Admin Panel</small></div>
+    </div>
+    <nav class="sidebar-nav">
+      <span class="nav-label">Main</span>
+        <a href="index.html" class="nav-link"><i class="fa-solid fa-gauge-high"></i><span>Dashboard</span></a>
+      <span class="nav-label">Management</span>
+        <a href="users.html" class="nav-link"><i class="fa-solid fa-users-gear"></i><span>User Management</span></a>
+        <a href="records.html" class="nav-link"><i class="fa-solid fa-file-medical"></i><span>Medical Records</span></a>
+        <a href="consultations.html" class="nav-link"><i class="fa-solid fa-stethoscope"></i><span>Consultations</span></a>
+        <a href="appointments.html" class="nav-link"><i class="fa-solid fa-calendar-check"></i><span>Appointments</span></a>
+      <span class="nav-label">Pharmacy</span>
+        <a href="inventory.html" class="nav-link"><i class="fa-solid fa-pills"></i><span>Medicine Inventory</span></a>
+        <a href="dispensing.html" class="nav-link"><i class="fa-solid fa-prescription-bottle-medical"></i><span>Dispensing</span></a>
+      <span class="nav-label">Services</span>
+        <a href="emergency.html" class="nav-link"><i class="fa-solid fa-truck-medical"></i><span>Incident & Emergency</span></a>
+        <a href="programs.html" class="nav-link"><i class="fa-solid fa-heart-pulse"></i><span>Health Programs</span></a>
+        <a href="clearance.html" class="nav-link"><i class="fa-solid fa-file-circle-check"></i><span>Health Clearance</span></a>
+      <span class="nav-label">System</span>
+        <a href="reports.html" class="nav-link"><i class="fa-solid fa-chart-line"></i><span>Reports</span></a>
+        <a href="settings.html" class="nav-link"><i class="fa-solid fa-gear"></i><span>Settings</span></a>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="#" onclick="logout(); return false;" class="dropdown-item text-danger">
+        <i class="fa-solid fa-arrow-right-from-bracket"></i> Log Out
+      </a>
+    </div>
+  </aside>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+  <!-- ===== Main ===== -->
+  <div class="main">
+  <!-- ===== Topbar ===== -->
+  <header class="topbar">
+    <button class="icon-btn" id="sidebarToggle"><i class="fa-solid fa-bars"></i></button>
+    <div class="search-box">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <input type="text" placeholder="Search users..." data-table-search="mainTable">
+    </div>
+    <div class="topbar-actions">
+      <div class="dropdown">
+        <button class="icon-btn" data-dropdown-toggle="notifDropdown"><i class="fa-solid fa-bell"></i><span class="dot"></span></button>
+        <div class="dropdown-menu dropdown-menu-wide" id="notifDropdown">
+          <div class="dropdown-head">Notifications</div>
+          <a href="#" class="dropdown-item"><i class="fa-solid fa-calendar-check"></i> New appointment booked</a>
+          <a href="#" class="dropdown-item"><i class="fa-solid fa-pills"></i> Low stock alert: Paracetamol</a>
+          <a href="#" class="dropdown-item"><i class="fa-solid fa-file-circle-check"></i> 3 clearance requests pending</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button class="user-chip" data-dropdown-toggle="userDropdown">
+          <span class="avatar">AD</span>
+          <span class="user-meta"><strong>Admin User</strong><small>Administrator</small></span>
+          <i class="fa-solid fa-chevron-down"></i>
+        </button>
+        <div class="dropdown-menu" id="userDropdown">
+          <a href="settings.html" class="dropdown-item"><i class="fa-solid fa-user"></i> My Profile</a>
+          <a href="#" class="dropdown-item"><i class="fa-solid fa-gear"></i> Preferences</a>
+          <div class="dropdown-divider"></div>
+          <a href="#" onclick="logout(); return false;" class="dropdown-item text-danger">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i> Log Out
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+    <main class="content">
+
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">User Management</h1>
+          <p class="page-subtitle">Manage system accounts for admins, clinic staff, and students.</p>
+        </div>
+        <div class="page-actions">
+          <button class="btn btn-primary" data-modal-open="userModal"><i class="fa-solid fa-user-plus"></i> Add User</button>
+        </div>
+      </div>
+
+      <div class="filter-bar">
+        <select class="form-control" data-table-filter="mainTable" data-filter-attr="role">
+          <option value="all">All Roles</option>
+          <option value="admin">Admin</option>
+          <option value="staff">Staff</option>
+          <option value="student">Student</option>
+        </select>
+        <select class="form-control" data-table-filter="mainTable" data-filter-attr="status">
+          <option value="all">All Status</option>
+          <option value="active">Active</option>
+          <option value="inactive">Inactive</option>
+        </select>
+      </div>
+
+      <div class="card">
+        <div class="table-wrap">
+          <table class="table" id="mainTable">
+            <thead><tr><th>User</th><th>Role</th><th>Department</th><th>Last Login</th><th>Status</th><th>Actions</th></tr></thead>
+            <tbody>
+              <tr data-role="admin" data-status="active">
+                <td><div class="user-cell"><span class="avatar avatar-purple">AD</span><div><strong>Admin User</strong><small>admin@campuscare.edu</small></div></div></td>
+                <td><span class="badge badge-purple">Admin</span></td><td>Clinic Office</td><td>Mar 10, 2025 09:41 AM</td>
+                <td><span class="badge badge-success">Active</span></td>
+                <td><div class="table-actions"><button class="action-btn" data-modal-open="userModal" title="Edit"><i class="fa-solid fa-pen"></i></button><button class="action-btn danger" data-toast="User deactivated" data-toast-type="danger" title="Delete"><i class="fa-solid fa-trash"></i></button></div></td>
+              </tr>
+              <tr data-role="staff" data-status="active">
+                <td><div class="user-cell"><span class="avatar">KG</span><div><strong>Dr. Kenji Gorgod</strong><small>l.gorgod@campuscare.edu</small></div></div></td>
+                <td><span class="badge badge-info">Staff</span></td><td>Medical</td><td>Mar 10, 2025 08:15 AM</td>
+                <td><span class="badge badge-success">Active</span></td>
+                <td><div class="table-actions"><button class="action-btn" data-modal-open="userModal" title="Edit"><i class="fa-solid fa-pen"></i></button><button class="action-btn danger" data-toast="User deactivated" data-toast-type="danger" title="Delete"><i class="fa-solid fa-trash"></i></button></div></td>
+              </tr>
+              <tr data-role="staff" data-status="active">
+                <td><div class="user-cell"><span class="avatar avatar-blue">LT</span><div><strong>Dr. Llapitan Tutan</strong><small>L.tutan@campuscare.edu</small></div></div></td>
+                <td><span class="badge badge-info">Staff</span></td><td>Dental</td><td>Mar 09, 2025 04:02 PM</td>
+                <td><span class="badge badge-success">Active</span></td>
+                <td><div class="table-actions"><button class="action-btn" data-modal-open="userModal" title="Edit"><i class="fa-solid fa-pen"></i></button><button class="action-btn danger" data-toast="User deactivated" data-toast-type="danger" title="Delete"><i class="fa-solid fa-trash"></i></button></div></td>
+              </tr>
+             
+              <tr data-role="student" data-status="active">
+                <td><div class="user-cell"><span class="avatar">JD</span><div><strong>Juan Dela Cruz</strong><small>juan.delacruz@student.edu</small></div></div></td>
+                <td><span class="badge badge-success">Student</span></td><td>BSIT 3rd Year</td><td>Mar 09, 2025 06:20 PM</td>
+                <td><span class="badge badge-success">Active</span></td>
+                <td><div class="table-actions"><button class="action-btn" data-modal-open="userModal" title="Edit"><i class="fa-solid fa-pen"></i></button><button class="action-btn danger" data-toast="User deactivated" data-toast-type="danger" title="Delete"><i class="fa-solid fa-trash"></i></button></div></td>
+              </tr>
+              <tr data-role="student" data-status="inactive">
+                <td><div class="user-cell"><span class="avatar avatar-blue">MS</span><div><strong>Maria Santos</strong><small>maria.santos@student.edu</small></div></div></td>
+                <td><span class="badge badge-success">Student</span></td><td>BSN 2nd Year</td><td>Feb 27, 2025 11:10 AM</td>
+                <td><span class="badge badge-secondary">Inactive</span></td>
+                <td><div class="table-actions"><button class="action-btn" data-modal-open="userModal" title="Edit"><i class="fa-solid fa-pen"></i></button><button class="action-btn danger" data-toast="User deactivated" data-toast-type="danger" title="Delete"><i class="fa-solid fa-trash"></i></button></div></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Add / Edit User Modal -->
+      <div class="modal-overlay" id="userModal">
+        <div class="modal">
+          <div class="modal-header">
+            <h3 class="modal-title"><i class="fa-solid fa-user-plus"></i> Add / Edit User</h3>
+            <button class="modal-close" data-modal-close><i class="fa-solid fa-xmark"></i></button>
+          </div>
+          <form class="js-demo-form" data-toast="User saved successfully">
+            <div class="modal-body">
+              <div class="form-group"><label class="form-label">Full Name <span class="req">*</span></label><input type="text" class="form-control" placeholder="Enter full name" required></div>
+              <div class="form-group"><label class="form-label">Email Address <span class="req">*</span></label><input type="email" class="form-control" placeholder="name@campuscare.edu" required></div>
+              <div class="form-row">
+                <div class="form-group"><label class="form-label">Role <span class="req">*</span></label>
+                  <select class="form-control" required><option value="">Select role</option><option>Admin</option><option>Staff</option><option>Student</option></select>
+                </div>
+                <div class="form-group"><label class="form-label">Department</label><input type="text" class="form-control" placeholder="e.g. Medical, BSIT"></div>
+              </div>
+              <div class="form-group"><label class="form-label">Temporary Password <span class="req">*</span></label><input type="password" class="form-control" placeholder="Enter password" required></div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-outline" data-modal-close>Cancel</button>
+              <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Save User</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+<script src="../js/master.js"></script>
+</body>
+</html>

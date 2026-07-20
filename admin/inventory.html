@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Medicine Inventory | AlagaGo Clinic</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="../css/master.css">
+  <script src="/session-guard.js"></script>
+  
+</head>
+<body>
+<div class="app">
+  <!-- ===== Sidebar ===== -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <div class="brand-icon"><i class="fa-solid fa-staff-snake"></i></div>
+      <div class="brand-text"><strong>AlagaGo</strong><small>Admin Panel</small></div>
+    </div>
+    <nav class="sidebar-nav">
+      <span class="nav-label">Main</span>
+        <a href="index.html" class="nav-link"><i class="fa-solid fa-gauge-high"></i><span>Dashboard</span></a>
+      <span class="nav-label">Management</span>
+        <a href="users.html" class="nav-link"><i class="fa-solid fa-users-gear"></i><span>User Management</span></a>
+        <a href="records.html" class="nav-link"><i class="fa-solid fa-file-medical"></i><span>Medical Records</span></a>
+        <a href="consultations.html" class="nav-link"><i class="fa-solid fa-stethoscope"></i><span>Consultations</span></a>
+        <a href="appointments.html" class="nav-link"><i class="fa-solid fa-calendar-check"></i><span>Appointments</span></a>
+      <span class="nav-label">Pharmacy</span>
+        <a href="inventory.html" class="nav-link"><i class="fa-solid fa-pills"></i><span>Medicine Inventory</span></a>
+        <a href="dispensing.html" class="nav-link"><i class="fa-solid fa-prescription-bottle-medical"></i><span>Dispensing</span></a>
+      <span class="nav-label">Services</span>
+        <a href="emergency.html" class="nav-link"><i class="fa-solid fa-truck-medical"></i><span>Incident & Emergency</span></a>
+        <a href="programs.html" class="nav-link"><i class="fa-solid fa-heart-pulse"></i><span>Health Programs</span></a>
+        <a href="clearance.html" class="nav-link"><i class="fa-solid fa-file-circle-check"></i><span>Health Clearance</span></a>
+      <span class="nav-label">System</span>
+        <a href="reports.html" class="nav-link"><i class="fa-solid fa-chart-line"></i><span>Reports</span></a>
+        <a href="settings.html" class="nav-link"><i class="fa-solid fa-gear"></i><span>Settings</span></a>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="#" onclick="logout(); return false;" class="dropdown-item text-danger">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i> Log Out
+      </a>
+    </div>
+  </aside>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+  <!-- ===== Main ===== -->
+  <div class="main">
+  <!-- ===== Topbar ===== -->
+  <header class="topbar">
+    <button class="icon-btn" id="sidebarToggle"><i class="fa-solid fa-bars"></i></button>
+    <div class="search-box">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <input type="text" placeholder="Search medicines..." data-table-search="mainTable">
+    </div>
+    <div class="topbar-actions">
+      <div class="dropdown">
+        <button class="icon-btn" data-dropdown-toggle="notifDropdown"><i class="fa-solid fa-bell"></i><span class="dot"></span></button>
+        <div class="dropdown-menu dropdown-menu-wide" id="notifDropdown">
+          <div class="dropdown-head">Notifications</div>
+          <a href="#" class="dropdown-item"><i class="fa-solid fa-calendar-check"></i> New appointment booked</a>
+          <a href="#" class="dropdown-item"><i class="fa-solid fa-pills"></i> Low stock alert: Paracetamol</a>
+          <a href="#" class="dropdown-item"><i class="fa-solid fa-file-circle-check"></i> 3 clearance requests pending</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button class="user-chip" data-dropdown-toggle="userDropdown">
+          <span class="avatar">AD</span>
+          <span class="user-meta"><strong>Admin User</strong><small>Administrator</small></span>
+          <i class="fa-solid fa-chevron-down"></i>
+        </button>
+        <div class="dropdown-menu" id="userDropdown">
+          <a href="settings.html" class="dropdown-item"><i class="fa-solid fa-user"></i> My Profile</a>
+          <a href="#" class="dropdown-item"><i class="fa-solid fa-gear"></i> Preferences</a>
+          <div class="dropdown-divider"></div>
+          <a href="#" onclick="logout(); return false;" class="dropdown-item text-danger">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i> Log Out
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+    <main class="content">
+
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">Medicine Inventory</h1>
+          <p class="page-subtitle">Monitor medicine stock levels, expiry dates, and suppliers.</p>
+        </div>
+        <div class="page-actions">
+          <button class="btn btn-outline" data-modal-open="restockModal"><i class="fa-solid fa-boxes-stacked"></i> Add Stock</button>
+          <button class="btn btn-primary" data-modal-open="medicineModal"><i class="fa-solid fa-plus"></i> Add Medicine</button>
+        </div>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card"><div class="stat-icon bg-blue"><i class="fa-solid fa-pills"></i></div><div><span class="stat-value">0</span><span class="stat-label">Total Medicines</span></div></div>
+        <div class="stat-card"><div class="stat-icon bg-amber"><i class="fa-solid fa-arrow-trend-down"></i></div><div><span class="stat-value">0</span><span class="stat-label">Low Stock</span></div></div>
+        <div class="stat-card"><div class="stat-icon bg-red"><i class="fa-solid fa-circle-xmark"></i></div><div><span class="stat-value">0</span><span class="stat-label">Out of Stock</span></div></div>
+        <div class="stat-card"><div class="stat-icon bg-purple"><i class="fa-solid fa-hourglass-half"></i></div><div><span class="stat-value">0</span><span class="stat-label">Expiring Soon</span></div></div>
+      </div>
+
+      <div class="alert alert-warning">
+        <i class="fa-solid fa-triangle-exclamation"></i>
+        <div><strong>Stock alert:</strong> Amoxicillin 500mg is out of stock, and Paracetamol 500mg is below its reorder level. Restock is recommended.</div>
+      </div>
+
+      <div class="card">
+        <div class="table-wrap">
+          <table class="table" id="mainTable">
+            <thead><tr><th>Medicine</th><th>Category</th><th>Stock</th><th>Reorder Level</th><th>Expiry Date</th><th>Status</th><th>Actions</th></tr></thead>
+            <tbody>
+              <tr><td class="fw-bold">Paracetamol 500mg</td><td><span class="badge badge-info">Analgesic</span></td><td>12 tabs</td><td>50</td><td>Aug 2025</td><td><span class="badge badge-warning">Low Stock</span></td>
+                <td><div class="table-actions"><button class="action-btn success" data-modal-open="restockModal" title="Add stock"><i class="fa-solid fa-plus"></i></button><button class="action-btn" data-modal-open="medicineModal" title="Edit"><i class="fa-solid fa-pen"></i></button><button class="action-btn danger" data-toast="Medicine removed" data-toast-type="danger" title="Delete"><i class="fa-solid fa-trash"></i></button></div></td></tr>
+              <tr><td class="fw-bold">Amoxicillin 500mg</td><td><span class="badge badge-purple">Antibiotic</span></td><td>0 caps</td><td>30</td><td>Jun 2025</td><td><span class="badge badge-danger">Out of Stock</span></td>
+                <td><div class="table-actions"><button class="action-btn success" data-modal-open="restockModal" title="Add stock"><i class="fa-solid fa-plus"></i></button><button class="action-btn" data-modal-open="medicineModal" title="Edit"><i class="fa-solid fa-pen"></i></button><button class="action-btn danger" data-toast="Medicine removed" data-toast-type="danger" title="Delete"><i class="fa-solid fa-trash"></i></button></div></td></tr>
+              <tr><td class="fw-bold">Ibuprofen 400mg</td><td><span class="badge badge-info">Analgesic</span></td><td>240 tabs</td><td>50</td><td>Nov 2026</td><td><span class="badge badge-success">In Stock</span></td>
+                <td><div class="table-actions"><button class="action-btn success" data-modal-open="restockModal" title="Add stock"><i class="fa-solid fa-plus"></i></button><button class="action-btn" data-modal-open="medicineModal" title="Edit"><i class="fa-solid fa-pen"></i></button><button class="action-btn danger" data-toast="Medicine removed" data-toast-type="danger" title="Delete"><i class="fa-solid fa-trash"></i></button></div></td></tr>
+              <tr><td class="fw-bold">Cetirizine 10mg</td><td><span class="badge badge-teal">Antihistamine</span></td><td>18 tabs</td><td>40</td><td>Mar 2026</td><td><span class="badge badge-warning">Low Stock</span></td>
+                <td><div class="table-actions"><button class="action-btn success" data-modal-open="restockModal" title="Add stock"><i class="fa-solid fa-plus"></i></button><button class="action-btn" data-modal-open="medicineModal" title="Edit"><i class="fa-solid fa-pen"></i></button><button class="action-btn danger" data-toast="Medicine removed" data-toast-type="danger" title="Delete"><i class="fa-solid fa-trash"></i></button></div></td></tr>
+              <tr><td class="fw-bold">Loperamide 2mg</td><td><span class="badge badge-secondary">Antidiarrheal</span></td><td>96 caps</td><td>25</td><td>Jul 2026</td><td><span class="badge badge-success">In Stock</span></td>
+                <td><div class="table-actions"><button class="action-btn success" data-modal-open="restockModal" title="Add stock"><i class="fa-solid fa-plus"></i></button><button class="action-btn" data-modal-open="medicineModal" title="Edit"><i class="fa-solid fa-pen"></i></button><button class="action-btn danger" data-toast="Medicine removed" data-toast-type="danger" title="Delete"><i class="fa-solid fa-trash"></i></button></div></td></tr>
+              <tr><td class="fw-bold">Mefenamic Acid 500mg</td><td><span class="badge badge-info">Analgesic</span></td><td>150 caps</td><td>40</td><td>Jan 2026</td><td><span class="badge badge-success">In Stock</span></td>
+                <td><div class="table-actions"><button class="action-btn success" data-modal-open="restockModal" title="Add stock"><i class="fa-solid fa-plus"></i></button><button class="action-btn" data-modal-open="medicineModal" title="Edit"><i class="fa-solid fa-pen"></i></button><button class="action-btn danger" data-toast="Medicine removed" data-toast-type="danger" title="Delete"><i class="fa-solid fa-trash"></i></button></div></td></tr>
+              <tr><td class="fw-bold">Salbutamol Inhaler 100mcg</td><td><span class="badge badge-teal">Respiratory</span></td><td>8 pcs</td><td>10</td><td>Sep 2025</td><td><span class="badge badge-warning">Low Stock</span></td>
+                <td><div class="table-actions"><button class="action-btn success" data-modal-open="restockModal" title="Add stock"><i class="fa-solid fa-plus"></i></button><button class="action-btn" data-modal-open="medicineModal" title="Edit"><i class="fa-solid fa-pen"></i></button><button class="action-btn danger" data-toast="Medicine removed" data-toast-type="danger" title="Delete"><i class="fa-solid fa-trash"></i></button></div></td></tr>
+              <tr><td class="fw-bold">Oral Rehydration Salts</td><td><span class="badge badge-secondary">Electrolyte</span></td><td>200 sachets</td><td>50</td><td>Dec 2026</td><td><span class="badge badge-success">In Stock</span></td>
+                <td><div class="table-actions"><button class="action-btn success" data-modal-open="restockModal" title="Add stock"><i class="fa-solid fa-plus"></i></button><button class="action-btn" data-modal-open="medicineModal" title="Edit"><i class="fa-solid fa-pen"></i></button><button class="action-btn danger" data-toast="Medicine removed" data-toast-type="danger" title="Delete"><i class="fa-solid fa-trash"></i></button></div></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Add Medicine Modal -->
+      <div class="modal-overlay" id="medicineModal">
+        <div class="modal modal-lg">
+          <div class="modal-header">
+            <h3 class="modal-title"><i class="fa-solid fa-pills"></i> Add Medicine</h3>
+            <button class="modal-close" data-modal-close><i class="fa-solid fa-xmark"></i></button>
+          </div>
+          <form class="js-demo-form" data-toast="Medicine added to inventory">
+            <div class="modal-body">
+              <div class="form-row">
+                <div class="form-group"><label class="form-label">Medicine Name <span class="req">*</span></label><input type="text" class="form-control" placeholder="e.g. Paracetamol" required></div>
+                <div class="form-group"><label class="form-label">Category <span class="req">*</span></label>
+                  <select class="form-control" required><option value="">Select category</option><option>Analgesic</option><option>Antibiotic</option><option>Antihistamine</option><option>Antidiarrheal</option><option>Respiratory</option><option>Electrolyte</option><option>First Aid</option><option>Other</option></select>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group"><label class="form-label">Dosage / Strength</label><input type="text" class="form-control" placeholder="e.g. 500mg"></div>
+                <div class="form-group"><label class="form-label">Unit</label>
+                  <select class="form-control"><option>Tablets</option><option>Capsules</option><option>Bottles</option><option>Sachets</option><option>Pieces</option></select>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group"><label class="form-label">Initial Quantity <span class="req">*</span></label><input type="number" class="form-control" placeholder="0" required></div>
+                <div class="form-group"><label class="form-label">Reorder Level</label><input type="number" class="form-control" placeholder="e.g. 50"></div>
+              </div>
+              <div class="form-row">
+                <div class="form-group"><label class="form-label">Expiry Date</label><input type="month" class="form-control"></div>
+                <div class="form-group"><label class="form-label">Supplier</label><input type="text" class="form-control" placeholder="Supplier name"></div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-outline" data-modal-close>Cancel</button>
+              <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Save Medicine</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Restock Modal -->
+      <div class="modal-overlay" id="restockModal">
+        <div class="modal modal-sm">
+          <div class="modal-header">
+            <h3 class="modal-title"><i class="fa-solid fa-boxes-stacked"></i> Add Stock</h3>
+            <button class="modal-close" data-modal-close><i class="fa-solid fa-xmark"></i></button>
+          </div>
+          <form class="js-demo-form" data-toast="Stock updated successfully">
+            <div class="modal-body">
+              <div class="form-group"><label class="form-label">Medicine <span class="req">*</span></label>
+                <select class="form-control" required><option value="">Select medicine</option><option>Paracetamol 500mg</option><option>Amoxicillin 500mg</option><option>Ibuprofen 400mg</option><option>Cetirizine 10mg</option><option>Salbutamol Inhaler</option></select>
+              </div>
+              <div class="form-group"><label class="form-label">Quantity to Add <span class="req">*</span></label><input type="number" class="form-control" placeholder="0" required></div>
+              <div class="form-group"><label class="form-label">New Expiry Date</label><input type="month" class="form-control"></div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-outline" data-modal-close>Cancel</button>
+              <button type="submit" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Add Stock</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+<script src="../js/master.js"></script>
+</body>
+</html>

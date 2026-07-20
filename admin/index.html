@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard | AlagaGo Clinic</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="../css/master.css">
+  <script src="/session-guard.js"></script>
+  
+</head>
+<body>
+<div class="app">
+  <!-- ===== Sidebar ===== -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <div class="brand-icon"><i class="fa-solid fa-staff-snake"></i></div>
+      <div class="brand-text"><strong>AlagaGo</strong><small>Admin Panel</small></div>
+    </div>
+    <nav class="sidebar-nav">
+      <span class="nav-label">Main</span>
+        <a href="index.html" class="nav-link"><i class="fa-solid fa-gauge-high"></i><span>Dashboard</span></a>
+      <span class="nav-label">Management</span>
+        <a href="users.html" class="nav-link"><i class="fa-solid fa-users-gear"></i><span>User Management</span></a>
+        <a href="records.html" class="nav-link"><i class="fa-solid fa-file-medical"></i><span>Medical Records</span></a>
+        <a href="consultations.html" class="nav-link"><i class="fa-solid fa-stethoscope"></i><span>Consultations</span></a>
+        <a href="appointments.html" class="nav-link"><i class="fa-solid fa-calendar-check"></i><span>Appointments</span></a>
+      <span class="nav-label">Pharmacy</span>
+        <a href="inventory.html" class="nav-link"><i class="fa-solid fa-pills"></i><span>Medicine Inventory</span></a>
+        <a href="dispensing.html" class="nav-link"><i class="fa-solid fa-prescription-bottle-medical"></i><span>Dispensing</span></a>
+      <span class="nav-label">Services</span>
+        <a href="emergency.html" class="nav-link"><i class="fa-solid fa-truck-medical"></i><span>Incident & Emergency</span></a>
+        <a href="programs.html" class="nav-link"><i class="fa-solid fa-heart-pulse"></i><span>Health Programs</span></a>
+        <a href="clearance.html" class="nav-link"><i class="fa-solid fa-file-circle-check"></i><span>Health Clearance</span></a>
+      <span class="nav-label">System</span>
+        <a href="reports.html" class="nav-link"><i class="fa-solid fa-chart-line"></i><span>Reports</span></a>
+        <a href="settings.html" class="nav-link"><i class="fa-solid fa-gear"></i><span>Settings</span></a>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="#" onclick="logout(); return false;" class="dropdown-item text-danger">
+        <i class="fa-solid fa-arrow-right-from-bracket"></i> Log Out
+      </a>
+    </div>
+  </aside>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+  <!-- ===== Main ===== -->
+  <div class="main">
+  <!-- ===== Topbar ===== -->
+  <header class="topbar">
+    <button class="icon-btn" id="sidebarToggle"><i class="fa-solid fa-bars"></i></button>
+    <div class="search-box">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <input type="text" placeholder="Search..." data-table-search="mainTable">
+    </div>
+    <div class="topbar-actions">
+      <div class="dropdown">
+        <button class="icon-btn" data-dropdown-toggle="notifDropdown"><i class="fa-solid fa-bell"></i><span class="dot"></span></button>
+        <div class="dropdown-menu dropdown-menu-wide" id="notifDropdown">
+          <div class="dropdown-head">Notifications</div>
+          <a href="#" class="dropdown-item"><i class="fa-solid fa-calendar-check"></i> New appointment booked</a>
+          <a href="#" class="dropdown-item"><i class="fa-solid fa-pills"></i> Low stock alert: Paracetamol</a>
+          <a href="#" class="dropdown-item"><i class="fa-solid fa-file-circle-check"></i> 3 clearance requests pending</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button class="user-chip" data-dropdown-toggle="userDropdown">
+          <span class="avatar">AD</span>
+          <span class="user-meta"><strong>Admin User</strong><small>Administrator</small></span>
+          <i class="fa-solid fa-chevron-down"></i>
+        </button>
+        <div class="dropdown-menu" id="userDropdown">
+          <a href="settings.html" class="dropdown-item"><i class="fa-solid fa-user"></i> My Profile</a>
+          <a href="#" class="dropdown-item"><i class="fa-solid fa-gear"></i> Preferences</a>
+          <div class="dropdown-divider"></div>
+         <a href="#" onclick="logout(); return false;" class="dropdown-item text-danger">
+          <i class="fa-solid fa-arrow-right-from-bracket"></i> Log Out
+         </a>
+        </div>
+      </div>
+    </div>
+  </header>
+    <main class="content">
+
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">Dashboard</h1>
+          <p class="page-subtitle">Welcome back! Here's an overview of today's clinic activity.</p>
+        </div>
+        <div class="page-actions">
+          <a href="appointments.html" class="btn btn-outline"><i class="fa-solid fa-calendar-plus"></i> New Appointment</a>
+          <a href="records.html" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Add Record</a>
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon bg-blue"><i class="fa-solid fa-calendar-day"></i></div>
+          <div><span class="stat-value">0</span><span class="stat-label">Today's Appointments</span></div>
+          <span class="stat-trend up"><i class="fa-solid fa-arrow-up"></i> 0%</span>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon bg-teal"><i class="fa-solid fa-user-injured"></i></div>
+          <div><span class="stat-value">0</span><span class="stat-label">Patients Today</span></div>
+          <span class="stat-trend up"><i class="fa-solid fa-arrow-up"></i> 0%</span>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon bg-amber"><i class="fa-solid fa-triangle-exclamation"></i></div>
+          <div><span class="stat-value">0</span><span class="stat-label">Low Stock Medicines</span></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon bg-purple"><i class="fa-solid fa-file-circle-check"></i></div>
+          <div><span class="stat-value">0</span><span class="stat-label">Pending Clearances</span></div>
+        </div>
+      </div>
+
+      <div class="grid-2-1">
+        <!-- Today's appointments -->
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title"><i class="fa-solid fa-calendar-check"></i> Today's Appointments</h3>
+            <a href="appointments.html" class="card-link">View all</a>
+          </div>
+          <div class="table-wrap">
+            <table class="table" id="mainTable">
+              <thead><tr><th>Time</th><th>Patient</th><th>Type</th><th>Doctor</th><th>Status</th></tr></thead>
+              <tbody>
+               
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div>
+          <!-- Notifications -->
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title"><i class="fa-solid fa-bell"></i> Notifications</h3>
+              <a href="#" class="card-link">Mark all read</a>
+            </div>
+            <div class="list-item">
+              <div class="list-icon bg-blue"><i class="fa-solid fa-calendar-check"></i></div>
+              <div class="list-body"><p class="list-title">New appointment booked</p><p class="list-sub">Jhon Rhey Llapitan &mdash; Tomorrow, 9:00 AM</p></div>
+              <span class="list-time">5m</span>
+            </div>
+            <div class="list-item">
+              <div class="list-icon bg-amber"><i class="fa-solid fa-pills"></i></div>
+              <div class="list-body"><p class="list-title">Low stock alert</p><p class="list-sub">Paracetamol 500mg below reorder level</p></div>
+              <span class="list-time">30m</span>
+            </div>
+            <div class="list-item">
+              <div class="list-icon bg-red"><i class="fa-solid fa-truck-medical"></i></div>
+              <div class="list-body"><p class="list-title">Incident reported</p><p class="list-sub">Sports injury at the covered court</p></div>
+              <span class="list-time">1h</span>
+            </div>
+            <div class="list-item">
+              <div class="list-icon bg-purple"><i class="fa-solid fa-file-circle-check"></i></div>
+              <div class="list-body"><p class="list-title">Clearance requested</p><p class="list-sub">Carlo Aquino &mdash; OJT requirement</p></div>
+              <span class="list-time">2h</span>
+            </div>
+          </div>
+
+          <!-- Low stock -->
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title"><i class="fa-solid fa-box-open"></i> Low Stock Alert</h3>
+              <a href="inventory.html" class="card-link">View inventory</a>
+            </div>
+            <div class="list-item">
+              <div class="list-icon bg-amber"><i class="fa-solid fa-pills"></i></div>
+              <div class="list-body"><p class="list-title">Parasatakmol 500mg</p><p class="list-sub">0 tablets left</p></div>
+              <span class="badge badge-warning">Low</span>
+            </div>
+            <div class="list-item">
+              <div class="list-icon bg-red"><i class="fa-solid fa-capsules"></i></div>
+              <div class="list-body"><p class="list-title">Amoxicillin 500mg</p><p class="list-sub">0 capsules left</p></div>
+              <span class="badge badge-danger">Out</span>
+            </div>
+            <div class="list-item">
+              <div class="list-icon bg-amber"><i class="fa-solid fa-pills"></i></div>
+              <div class="list-body"><p class="list-title">Cetirizine 10mg</p><p class="list-sub">0 tablets left</p></div>
+              <span class="badge badge-warning">Low</span>
+            </div>
+            <div class="list-item">
+              <div class="list-icon bg-amber"><i class="fa-solid fa-pump-medical"></i></div>
+              <div class="list-body"><p class="list-title">Betadine 0% Solution</p><p class="list-sub">0 bottles left</p></div>
+              <span class="badge badge-warning">Low</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+<script src="../js/master.js"></script>
+</body>
+</html>

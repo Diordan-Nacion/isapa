@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Medical Records | AlagaGo Clinic</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="../css/master.css">
+  <script src="/session-guard.js"></script>
+
+</head>
+<body>
+<div class="app">
+  <!-- ===== Sidebar ===== -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <div class="brand-icon"><i class="fa-solid fa-staff-snake"></i></div>
+      <div class="brand-text"><strong>AlagaGo</strong><small>Staff Portal</small></div>
+    </div>
+    <nav class="sidebar-nav">
+      <span class="nav-label">Main</span>
+        <a href="index.html" class="nav-link"><i class="fa-solid fa-gauge-high"></i><span>Dashboard</span></a>
+      <span class="nav-label">Clinic</span>
+        <a href="records.html" class="nav-link"><i class="fa-solid fa-file-medical"></i><span>Medical Records</span></a>
+        <a href="consultations.html" class="nav-link"><i class="fa-solid fa-stethoscope"></i><span>Consultations</span></a>
+        <a href="appointments.html" class="nav-link"><i class="fa-solid fa-calendar-check"></i><span>Appointments</span></a>
+      <span class="nav-label">Pharmacy</span>
+        <a href="inventory.html" class="nav-link"><i class="fa-solid fa-pills"></i><span>Medicine Inventory</span></a>
+        <a href="dispensing.html" class="nav-link"><i class="fa-solid fa-prescription-bottle-medical"></i><span>Dispensing</span></a>
+      <span class="nav-label">Services</span>
+        <a href="emergency.html" class="nav-link"><i class="fa-solid fa-truck-medical"></i><span>Incident & Emergency</span></a>
+        <a href="programs.html" class="nav-link"><i class="fa-solid fa-heart-pulse"></i><span>Health Programs</span></a>
+        <a href="clearance.html" class="nav-link"><i class="fa-solid fa-file-circle-check"></i><span>Health Clearance</span></a>
+      <span class="nav-label">System</span>
+        <a href="reports.html" class="nav-link"><i class="fa-solid fa-chart-line"></i><span>Reports</span></a>
+        <a href="profile.html" class="nav-link"><i class="fa-solid fa-user-doctor"></i><span>My Profile</span></a>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="#" onclick="logout(); return false;" class="dropdown-item text-danger">
+        <i class="fa-solid fa-arrow-right-from-bracket"></i> Log Out
+      </a>
+    </div>
+  </aside>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+  <!-- ===== Main ===== -->
+  <div class="main">
+  <!-- ===== Topbar ===== -->
+  <header class="topbar">
+    <button class="icon-btn" id="sidebarToggle"><i class="fa-solid fa-bars"></i></button>
+    <div class="search-box">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <input type="text" placeholder="Search records..." data-table-search="mainTable">
+    </div>
+    <div class="topbar-actions">
+      <div class="dropdown">
+        <button class="icon-btn" data-dropdown-toggle="notifDropdown"><i class="fa-solid fa-bell"></i><span class="dot"></span></button>
+        <div class="dropdown-menu dropdown-menu-wide" id="notifDropdown">
+          <div class="dropdown-head">Notifications</div>
+          <a href="#" class="dropdown-item"><i class="fa-solid fa-calendar-check"></i> New appointment booked</a>
+          <a href="#" class="dropdown-item"><i class="fa-solid fa-pills"></i> Low stock alert: Paracetamol</a>
+          <a href="#" class="dropdown-item"><i class="fa-solid fa-file-circle-check"></i> 3 clearance requests pending</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button class="user-chip" data-dropdown-toggle="userDropdown">
+          <span class="avatar">SR</span>
+          <span class="user-meta"><strong>Dr. Sarah Reyes</strong><small>Clinic Physician</small></span>
+          <i class="fa-solid fa-chevron-down"></i>
+        </button>
+        <div class="dropdown-menu" id="userDropdown">
+          <a href="profile.html" class="dropdown-item"><i class="fa-solid fa-user"></i> My Profile</a>
+          <a href="#" class="dropdown-item"><i class="fa-solid fa-gear"></i> Preferences</a>
+          <div class="dropdown-divider"></div>
+          <a href="#" onclick="logout(); return false;" class="dropdown-item text-danger">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i> Log Out
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+    <main class="content">
+
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">Medical Records</h1>
+          <p class="page-subtitle">Browse and manage student medical records.</p>
+        </div>
+        <div class="page-actions">
+          <button class="btn btn-primary" data-modal-open="recordModal"><i class="fa-solid fa-plus"></i> Add New Record</button>
+        </div>
+      </div>
+
+      <div class="stats-grid" style="grid-template-columns:repeat(3,1fr)">
+        <div class="stat-card"><div class="stat-icon bg-blue"><i class="fa-solid fa-folder-open"></i></div><div><span class="stat-value">0</span><span class="stat-label">Total Records</span></div></div>
+        <div class="stat-card"><div class="stat-icon bg-teal"><i class="fa-solid fa-file-medical"></i></div><div><span class="stat-value">0</span><span class="stat-label">Records This Week</span></div></div>
+        <div class="stat-card"><div class="stat-icon bg-amber"><i class="fa-solid fa-rotate"></i></div><div><span class="stat-value">0</span><span class="stat-label">Follow-ups Needed</span></div></div>
+      </div>
+
+      <div class="card">
+        <div class="table-wrap">
+          <table class="table" id="mainTable">
+            <thead><tr><th>Record ID</th><th>Patient</th><th>Type</th><th>Diagnosis</th><th>Date</th><th>Attending</th><th>Actions</th></tr></thead>
+            <tbody>
+              <tr><td class="fw-bold">MR-1024</td><td><div class="user-cell"><span class="avatar avatar-sm">JD</span><div><strong>Juan Dela Cruz</strong><small>STU-2024-001</small></div></div></td><td><span class="badge badge-info">Consultation</span></td><td>Acute pharyngitis</td><td>Mar 10, 2025</td><td>Dr. Sarah Reyes</td>
+                <td><div class="table-actions"><button class="action-btn" data-toast="Opening record MR-1024" data-toast-type="info" title="View"><i class="fa-solid fa-eye"></i></button><button class="action-btn" data-modal-open="recordModal" title="Edit"><i class="fa-solid fa-pen"></i></button></div></td></tr>
+              <tr><td class="fw-bold">MR-1023</td><td><div class="user-cell"><span class="avatar avatar-sm avatar-blue">MS</span><div><strong>Maria Santos</strong><small>STU-2024-002</small></div></div></td><td><span class="badge badge-purple">Check-up</span></td><td>Annual physical exam &mdash; Normal</td><td>Mar 09, 2025</td><td>Nurse Grace Lim</td>
+                <td><div class="table-actions"><button class="action-btn" data-toast="Opening record MR-1023" data-toast-type="info" title="View"><i class="fa-solid fa-eye"></i></button><button class="action-btn" data-modal-open="recordModal" title="Edit"><i class="fa-solid fa-pen"></i></button></div></td></tr>
+              <tr><td class="fw-bold">MR-1022</td><td><div class="user-cell"><span class="avatar avatar-sm avatar-purple">JR</span><div><strong>Jose Ramirez</strong><small>STU-2023-045</small></div></div></td><td><span class="badge badge-danger">Emergency</span></td><td>Sprained ankle (right)</td><td>Mar 08, 2025</td><td>Dr. Sarah Reyes</td>
+                <td><div class="table-actions"><button class="action-btn" data-toast="Opening record MR-1022" data-toast-type="info" title="View"><i class="fa-solid fa-eye"></i></button><button class="action-btn" data-modal-open="recordModal" title="Edit"><i class="fa-solid fa-pen"></i></button></div></td></tr>
+              <tr><td class="fw-bold">MR-1021</td><td><div class="user-cell"><span class="avatar avatar-sm avatar-amber">AR</span><div><strong>Ana Reyes</strong><small>STU-2024-078</small></div></div></td><td><span class="badge badge-info">Consultation</span></td><td>Migraine</td><td>Mar 08, 2025</td><td>Dr. Michael Tan</td>
+                <td><div class="table-actions"><button class="action-btn" data-toast="Opening record MR-1021" data-toast-type="info" title="View"><i class="fa-solid fa-eye"></i></button><button class="action-btn" data-modal-open="recordModal" title="Edit"><i class="fa-solid fa-pen"></i></button></div></td></tr>
+              <tr><td class="fw-bold">MR-1020</td><td><div class="user-cell"><span class="avatar avatar-sm">MV</span><div><strong>Mark Villanueva</strong><small>STU-2022-112</small></div></div></td><td><span class="badge badge-success">Follow-up</span></td><td>Hypertension monitoring</td><td>Mar 07, 2025</td><td>Dr. Sarah Reyes</td>
+                <td><div class="table-actions"><button class="action-btn" data-toast="Opening record MR-1020" data-toast-type="info" title="View"><i class="fa-solid fa-eye"></i></button><button class="action-btn" data-modal-open="recordModal" title="Edit"><i class="fa-solid fa-pen"></i></button></div></td></tr>
+              <tr><td class="fw-bold">MR-1019</td><td><div class="user-cell"><span class="avatar avatar-sm avatar-blue">SM</span><div><strong>Sofia Mendoza</strong><small>STU-2024-090</small></div></div></td><td><span class="badge badge-info">Consultation</span></td><td>Allergic rhinitis</td><td>Mar 06, 2025</td><td>Nurse Grace Lim</td>
+                <td><div class="table-actions"><button class="action-btn" data-toast="Opening record MR-1019" data-toast-type="info" title="View"><i class="fa-solid fa-eye"></i></button><button class="action-btn" data-modal-open="recordModal" title="Edit"><i class="fa-solid fa-pen"></i></button></div></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Add Record Modal -->
+      <div class="modal-overlay" id="recordModal">
+        <div class="modal modal-lg">
+          <div class="modal-header">
+            <h3 class="modal-title"><i class="fa-solid fa-file-medical"></i> Add New Medical Record</h3>
+            <button class="modal-close" data-modal-close><i class="fa-solid fa-xmark"></i></button>
+          </div>
+          <form class="js-demo-form" data-toast="Medical record saved">
+            <div class="modal-body">
+              <div class="form-row">
+                <div class="form-group"><label class="form-label">Patient Name <span class="req">*</span></label><input type="text" class="form-control" placeholder="Enter patient name" required></div>
+                <div class="form-group"><label class="form-label">Student ID</label><input type="text" class="form-control" placeholder="STU-0000-000"></div>
+              </div>
+              <div class="form-row">
+                <div class="form-group"><label class="form-label">Record Type <span class="req">*</span></label>
+                  <select class="form-control" required><option value="">Select type</option><option>Consultation</option><option>Check-up</option><option>Emergency</option><option>Follow-up</option><option>Dental</option></select>
+                </div>
+                <div class="form-group"><label class="form-label">Date <span class="req">*</span></label><input type="date" class="form-control" required></div>
+              </div>
+              <div class="form-group"><label class="form-label">Diagnosis <span class="req">*</span></label><input type="text" class="form-control" placeholder="Enter diagnosis" required></div>
+              <div class="form-group"><label class="form-label">Treatment Given</label><input type="text" class="form-control" placeholder="e.g. Paracetamol 500mg, rest advised"></div>
+              <div class="form-row">
+                <div class="form-group"><label class="form-label">Attending Staff</label>
+                  <select class="form-control"><option>Dr. Sarah Reyes</option><option>Dr. Michael Tan</option><option>Nurse Grace Lim</option></select>
+                </div>
+                <div class="form-group"><label class="form-label">Next Visit (optional)</label><input type="date" class="form-control"></div>
+              </div>
+              <div class="form-group"><label class="form-label">Notes</label><textarea class="form-control" placeholder="Additional notes..."></textarea></div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-outline" data-modal-close>Cancel</button>
+              <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Save Record</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+<script src="../js/master.js"></script>
+</body>
+</html>

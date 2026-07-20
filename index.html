@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AlgaGo's Integrated Clinic Management System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="css/master.css">
+  <style>
+    .login-page {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #0f172a 0%, #134e4a 100%);
+      padding: 24px;
+    }
+    .login-box {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 20px 60px rgba(0,0,0,.3);
+      width: 100%;
+      max-width: 420px;
+      padding: 40px 36px;
+      animation: pop .35s ease;
+    }
+    @keyframes pop { from { transform: scale(.96) translateY(12px); opacity: 0; } to { transform: none; opacity: 1; } }
+    .login-logo {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+    .login-logo .brand-icon {
+      width: 56px;
+      height: 56px;
+      font-size: 24px;
+      border-radius: 14px;
+      margin: 0 auto 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #0d9488, #14b8a6);
+      color: #fff;
+    }
+    .login-logo h1 {
+      font-size: 20px;
+      font-weight: 800;
+      color: #1e293b;
+      margin-bottom: 4px;
+    }
+    .login-logo p {
+      font-size: 13px;
+      color: #64748b;
+    }
+    .role-tabs {
+      display: flex;
+      gap: 4px;
+      background: #f1f5f9;
+      border-radius: 10px;
+      padding: 4px;
+      margin-bottom: 24px;
+    }
+    .role-tab {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      background: none;
+      border-radius: 8px;
+      font: inherit;
+      font-size: 13px;
+      font-weight: 600;
+      color: #64748b;
+      cursor: pointer;
+      transition: all .15s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+    .role-tab.active {
+      background: #fff;
+      color: #0d9488;
+      box-shadow: 0 1px 3px rgba(0,0,0,.08);
+    }
+    .role-tab i { font-size: 12px; }
+    .login-form .form-group { margin-bottom: 18px; }
+    .login-form .form-label { font-size: 12.5px; margin-bottom: 6px; }
+    .login-form .form-control {
+      padding: 12px 14px;
+      font-size: 14px;
+    }
+    .login-form .btn {
+      width: 100%;
+      padding: 12px;
+      font-size: 14px;
+      margin-top: 6px;
+    }
+    .back-link {
+      text-align: center;
+      margin-top: 16px;
+    }
+    .back-link a {
+      color: #94a3b8;
+      font-size: 12.5px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .back-link a:hover { color: #0d9488; }
+    .hint-box {
+      background: #f0fdfa;
+      border: 1px solid #ccfbf1;
+      border-radius: 10px;
+      padding: 14px 16px;
+      margin-bottom: 20px;
+      font-size: 12.5px;
+      color: #0f766e;
+    }
+    .hint-box strong { display: block; margin-bottom: 6px; font-size: 13px; }
+    .hint-box code {
+      background: #ccfbf1;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: monospace;
+      font-size: 12px;
+    }
+    .hint-box.hidden { display: none; }
+
+    /* Password field with reveal icon */
+    .password-wrap {
+      position: relative;
+    }
+    .password-wrap .form-control {
+      padding-right: 44px;
+    }
+    .reveal-btn {
+      position: absolute;
+      right: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 32px;
+      height: 32px;
+      border: none;
+      background: transparent;
+      color: #94a3b8;
+      cursor: pointer;
+      font-size: 14px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 6px;
+      transition: color .15s, background .15s;
+    }
+    .reveal-btn:hover {
+      color: #0d9488;
+      background: #f0fdfa;
+    }
+    .reveal-btn:active {
+      color: #0f766e;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-page">
+    <div class="login-box">
+      <div class="login-logo">
+        <div class="brand-icon"><i class="fa-solid fa-staff-snake"></i></div>
+        <h1>AlagaGo's Clinic</h1>
+        <p>Sign in to your portal</p>
+      </div>
+
+      <!-- Role Tabs -->
+      <div class="role-tabs">
+        <button class="role-tab active" data-role="student" onclick="switchRole('student')">
+          <i class="fa-solid fa-user-graduate"></i> Student
+        </button>
+        <button class="role-tab" data-role="staff" onclick="switchRole('staff')">
+          <i class="fa-solid fa-user-doctor"></i> Staff
+        </button>
+        <button class="role-tab" data-role="admin" onclick="switchRole('admin')">
+          <i class="fa-solid fa-user-shield"></i> Admin
+        </button>
+      </div>
+
+      <!-- Hint Box -->
+      <div class="hint-box" id="hintBox">
+        <strong><i class="fa-solid fa-circle-info"></i> Demo Credentials</strong>
+        <span id="hintText">Student ID: <code>**********</code> &nbsp;|&nbsp; Password: <code>**********</code></span>
+      </div>
+
+      <!-- Login Form -->
+      <form class="login-form" id="loginForm" onsubmit="handleLogin(event)">
+        <div class="form-group">
+          <label class="form-label" id="userLabel">Student ID</label>
+          <input type="text" class="form-control" id="username" placeholder="Enter your ID" required autofocus>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Password</label>
+          <div class="password-wrap">
+            <input type="password" class="form-control" id="password" placeholder="Enter your password" required>
+            <button type="button" class="reveal-btn" id="revealBtn" onclick="togglePassword()" title="Show password">
+              <i class="fa-solid fa-eye" id="revealIcon"></i>
+            </button>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">
+          <i class="fa-solid fa-arrow-right-to-bracket"></i> Sign In
+        </button>
+      </form>
+
+      
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div class="toast-container"></div>
+
+  <script>
+    // ========== FIXED ACCOUNTS ==========
+    const ACCOUNTS = {
+      student: [
+        { username: '240108087', password: "Alli'sWell", name: 'Kenji Gorgod', role: 'student' }
+      ],
+      staff: [
+        { username: 'staff001', password: 'AlagaGo123', name: 'Keneth Manlunas', role: 'staff' }
+      ],
+      admin: [
+        { username: 'admin', password: 'admin123', name: 'System Administrator', role: 'admin' }
+      ]
+    };
+
+    let currentRole = 'student';
+
+    function switchRole(role) {
+      currentRole = role;
+      document.querySelectorAll('.role-tab').forEach(t => t.classList.toggle('active', t.dataset.role === role));
+
+      const userLabel = document.getElementById('userLabel');
+      const username = document.getElementById('username');
+      const hintText = document.getElementById('hintText');
+      const hintBox = document.getElementById('hintBox');
+
+      if (role === 'student') {
+        userLabel.textContent = 'Student ID';
+        username.placeholder = 'Enter your Student ID';
+        hintText.innerHTML = 'Student ID: <code>240108087</code> &nbsp;|&nbsp; Password: <code>Alli\'sWell</code>';
+        hintBox.classList.remove('hidden');
+      } else if (role === 'staff') {
+        userLabel.textContent = 'Staff ID';
+        username.placeholder = 'Enter your Staff ID';
+        hintText.innerHTML = 'Staff ID: <code>staff001</code> &nbsp;|&nbsp; Password: <code>AlagaGo123</code>';
+        hintBox.classList.remove('hidden');
+      } else {
+        userLabel.textContent = 'Username';
+        username.placeholder = 'Enter your username';
+        hintText.innerHTML = 'Username: <code>admin</code> &nbsp;|&nbsp; Password: <code>admin123</code>';
+        hintBox.classList.remove('hidden');
+      }
+      username.value = '';
+      document.getElementById('password').value = '';
+      document.getElementById('password').type = 'password';
+      document.getElementById('revealIcon').className = 'fa-solid fa-eye';
+      document.getElementById('revealBtn').title = 'Show password';
+      username.focus();
+    }
+
+    function togglePassword() {
+      const passwordInput = document.getElementById('password');
+      const revealIcon = document.getElementById('revealIcon');
+      const revealBtn = document.getElementById('revealBtn');
+
+      if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        revealIcon.className = 'fa-solid fa-eye-slash';
+        revealBtn.title = 'Hide password';
+      } else {
+        passwordInput.type = 'password';
+        revealIcon.className = 'fa-solid fa-eye';
+        revealBtn.title = 'Show password';
+      }
+    }
+
+    function handleLogin(e) {
+      e.preventDefault();
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value;
+
+      const accounts = ACCOUNTS[currentRole] || [];
+      const account = accounts.find(a => a.username === username && a.password === password);
+
+      if (account) {
+        localStorage.setItem('campuscare_user', JSON.stringify({
+          username: account.username,
+          name: account.name,
+          role: account.role,
+          loginTime: new Date().toISOString()
+        }));
+        showToast('Welcome, ' + account.name + '!', 'success');
+        setTimeout(() => {
+          window.location.href = account.role + '/index.html';
+        }, 800);
+      } else {
+        showToast('Invalid credentials. Please try again.', 'danger');
+      }
+    }
+
+    // Toast helper
+    function showToast(message, type) {
+      type = type || 'success';
+      var container = document.querySelector('.toast-container');
+      if (!container) {
+        container = document.createElement('div');
+        container.className = 'toast-container';
+        document.body.appendChild(container);
+      }
+      var icons = {
+        success: 'fa-circle-check',
+        info: 'fa-circle-info',
+        warning: 'fa-triangle-exclamation',
+        danger: 'fa-circle-xmark'
+      };
+      var toast = document.createElement('div');
+      toast.className = 'toast ' + type;
+      toast.innerHTML = '<i class="fa-solid ' + (icons[type] || icons.success) + '"></i><span>' + message + '</span>';
+      container.appendChild(toast);
+      setTimeout(function () {
+        toast.classList.add('hide');
+        setTimeout(function () { toast.remove(); }, 300);
+      }, 3200);
+    }
+
+    // Check if already logged in
+    (function() {
+      const session = localStorage.getItem('campuscare_user');
+      if (session) {
+        const user = JSON.parse(session);
+        const role = user.role;
+        window.location.href = role + '/index.html';
+      }
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Medicine Dispensing | AlagaGo Clinic</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="../css/master.css">
+  <script src="/session-guard.js"></script>
+
+</head>
+<body>
+<div class="app">
+  <!-- ===== Sidebar ===== -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <div class="brand-icon"><i class="fa-solid fa-staff-snake"></i></div>
+      <div class="brand-text"><strong>AlagaGo</strong><small>Staff Portal</small></div>
+    </div>
+    <nav class="sidebar-nav">
+      <span class="nav-label">Main</span>
+        <a href="index.html" class="nav-link"><i class="fa-solid fa-gauge-high"></i><span>Dashboard</span></a>
+      <span class="nav-label">Clinic</span>
+        <a href="records.html" class="nav-link"><i class="fa-solid fa-file-medical"></i><span>Medical Records</span></a>
+        <a href="consultations.html" class="nav-link"><i class="fa-solid fa-stethoscope"></i><span>Consultations</span></a>
+        <a href="appointments.html" class="nav-link"><i class="fa-solid fa-calendar-check"></i><span>Appointments</span></a>
+      <span class="nav-label">Pharmacy</span>
+        <a href="inventory.html" class="nav-link"><i class="fa-solid fa-pills"></i><span>Medicine Inventory</span></a>
+        <a href="dispensing.html" class="nav-link"><i class="fa-solid fa-prescription-bottle-medical"></i><span>Dispensing</span></a>
+      <span class="nav-label">Services</span>
+        <a href="emergency.html" class="nav-link"><i class="fa-solid fa-truck-medical"></i><span>Incident & Emergency</span></a>
+        <a href="programs.html" class="nav-link"><i class="fa-solid fa-heart-pulse"></i><span>Health Programs</span></a>
+        <a href="clearance.html" class="nav-link"><i class="fa-solid fa-file-circle-check"></i><span>Health Clearance</span></a>
+      <span class="nav-label">System</span>
+        <a href="reports.html" class="nav-link"><i class="fa-solid fa-chart-line"></i><span>Reports</span></a>
+        <a href="profile.html" class="nav-link"><i class="fa-solid fa-user-doctor"></i><span>My Profile</span></a>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="#" onclick="logout(); return false;" class="dropdown-item text-danger">
+        <i class="fa-solid fa-arrow-right-from-bracket"></i> Log Out
+      </a>
+    </div>
+  </aside>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+  <!-- ===== Main ===== -->
+  <div class="main">
+  <!-- ===== Topbar ===== -->
+  <header class="topbar">
+    <button class="icon-btn" id="sidebarToggle"><i class="fa-solid fa-bars"></i></button>
+    <div class="search-box">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <input type="text" placeholder="Search dispensing records..." data-table-search="mainTable">
+    </div>
+    <div class="topbar-actions">
+      <div class="dropdown">
+        <button class="icon-btn" data-dropdown-toggle="notifDropdown"><i class="fa-solid fa-bell"></i><span class="dot"></span></button>
+        <div class="dropdown-menu dropdown-menu-wide" id="notifDropdown">
+          <div class="dropdown-head">Notifications</div>
+          <a href="#" class="dropdown-item"><i class="fa-solid fa-calendar-check"></i> New appointment booked</a>
+          <a href="#" class="dropdown-item"><i class="fa-solid fa-pills"></i> Low stock alert: Paracetamol</a>
+          <a href="#" class="dropdown-item"><i class="fa-solid fa-file-circle-check"></i> 3 clearance requests pending</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button class="user-chip" data-dropdown-toggle="userDropdown">
+          <span class="avatar">SR</span>
+          <span class="user-meta"><strong>Dr. Sarah Reyes</strong><small>Clinic Physician</small></span>
+          <i class="fa-solid fa-chevron-down"></i>
+        </button>
+        <div class="dropdown-menu" id="userDropdown">
+          <a href="profile.html" class="dropdown-item"><i class="fa-solid fa-user"></i> My Profile</a>
+          <a href="#" class="dropdown-item"><i class="fa-solid fa-gear"></i> Preferences</a>
+          <div class="dropdown-divider"></div>
+          <a href="#" onclick="logout(); return false;" class="dropdown-item text-danger">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i> Log Out
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+    <main class="content">
+
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">Medicine Dispensing</h1>
+          <p class="page-subtitle">Record and track medicines dispensed to patients.</p>
+        </div>
+        <div class="page-actions">
+          <button class="btn btn-primary" data-modal-open="dispenseModal"><i class="fa-solid fa-prescription-bottle-medical"></i> Dispense Medicine</button>
+        </div>
+      </div>
+
+      <div class="stats-grid" style="grid-template-columns:repeat(3,1fr)">
+        <div class="stat-card"><div class="stat-icon bg-teal"><i class="fa-solid fa-hand-holding-medical"></i></div><div><span class="stat-value">0</span><span class="stat-label">Dispensed Today</span></div></div>
+        <div class="stat-card"><div class="stat-icon bg-blue"><i class="fa-solid fa-calendar-week"></i></div><div><span class="stat-value">0</span><span class="stat-label">This Week</span></div></div>
+        <div class="stat-card"><div class="stat-icon bg-amber"><i class="fa-solid fa-clock"></i></div><div><span class="stat-value">0</span><span class="stat-label">Pending Requests</span></div></div>
+      </div>
+
+      <div class="card">
+        <div class="table-wrap">
+          <table class="table" id="mainTable">
+            <thead><tr><th>ID</th><th>Patient</th><th>Medicine</th><th>Qty</th><th>Dispensed By</th><th>Date &amp; Time</th><th>Status</th><th>Actions</th></tr></thead>
+            <tbody>
+              <tr><td class="fw-bold">D-0912</td><td>Juan Dela Cruz</td><td>Paracetamol 500mg</td><td>10 tabs</td><td>Nurse Grace Lim</td><td>Mar 10, 2025 09:20 AM</td><td><span class="badge badge-success">Dispensed</span></td>
+                <td><div class="table-actions"><button class="action-btn" data-toast="Receipt printed" data-toast-type="info" title="Print"><i class="fa-solid fa-print"></i></button></div></td></tr>
+              <tr><td class="fw-bold">D-0911</td><td>Maria Santos</td><td>Cetirizine 10mg</td><td>5 tabs</td><td>Nurse Grace Lim</td><td>Mar 10, 2025 08:55 AM</td><td><span class="badge badge-success">Dispensed</span></td>
+                <td><div class="table-actions"><button class="action-btn" data-toast="Receipt printed" data-toast-type="info" title="Print"><i class="fa-solid fa-print"></i></button></div></td></tr>
+              <tr><td class="fw-bold">D-0910</td><td>Jose Ramirez</td><td>Mefenamic Acid 500mg</td><td>6 caps</td><td>Dr. Michael Tan</td><td>Mar 09, 2025 03:40 PM</td><td><span class="badge badge-success">Dispensed</span></td>
+                <td><div class="table-actions"><button class="action-btn" data-toast="Receipt printed" data-toast-type="info" title="Print"><i class="fa-solid fa-print"></i></button></div></td></tr>
+              <tr><td class="fw-bold">D-0909</td><td>Ana Reyes</td><td>Ibuprofen 400mg</td><td>8 tabs</td><td>Nurse Grace Lim</td><td>Mar 09, 2025 01:15 PM</td><td><span class="badge badge-warning">Pending</span></td>
+                <td><div class="table-actions"><button class="action-btn success" data-toast="Marked as dispensed" title="Complete"><i class="fa-solid fa-check"></i></button></div></td></tr>
+              <tr><td class="fw-bold">D-0908</td><td>Mark Villanueva</td><td>Salbutamol Inhaler</td><td>1 pc</td><td>Dr. Sarah Reyes</td><td>Mar 08, 2025 11:30 AM</td><td><span class="badge badge-success">Dispensed</span></td>
+                <td><div class="table-actions"><button class="action-btn" data-toast="Receipt printed" data-toast-type="info" title="Print"><i class="fa-solid fa-print"></i></button></div></td></tr>
+              <tr><td class="fw-bold">D-0907</td><td>Sofia Mendoza</td><td>Oral Rehydration Salts</td><td>4 sachets</td><td>Nurse Grace Lim</td><td>Mar 08, 2025 10:05 AM</td><td><span class="badge badge-success">Dispensed</span></td>
+                <td><div class="table-actions"><button class="action-btn" data-toast="Receipt printed" data-toast-type="info" title="Print"><i class="fa-solid fa-print"></i></button></div></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Dispense Modal -->
+      <div class="modal-overlay" id="dispenseModal">
+        <div class="modal">
+          <div class="modal-header">
+            <h3 class="modal-title"><i class="fa-solid fa-prescription-bottle-medical"></i> Dispense Medicine</h3>
+            <button class="modal-close" data-modal-close><i class="fa-solid fa-xmark"></i></button>
+          </div>
+          <form class="js-demo-form" data-toast="Medicine dispensed successfully">
+            <div class="modal-body">
+              <div class="form-row">
+                <div class="form-group"><label class="form-label">Patient Name <span class="req">*</span></label><input type="text" class="form-control" placeholder="Enter patient name" required></div>
+                <div class="form-group"><label class="form-label">Student ID</label><input type="text" class="form-control" placeholder="STU-0000-000"></div>
+              </div>
+              <div class="form-row">
+                <div class="form-group"><label class="form-label">Medicine <span class="req">*</span></label>
+                  <select class="form-control" required><option value="">Select medicine</option><option>Paracetamol 500mg</option><option>Ibuprofen 400mg</option><option>Cetirizine 10mg</option><option>Loperamide 2mg</option><option>Mefenamic Acid 500mg</option><option>Oral Rehydration Salts</option></select>
+                </div>
+                <div class="form-group"><label class="form-label">Quantity <span class="req">*</span></label><input type="number" class="form-control" placeholder="0" required></div>
+              </div>
+              <div class="form-group"><label class="form-label">Remarks</label><textarea class="form-control" placeholder="Dosage instructions, e.g. Take 1 tab every 6 hours"></textarea></div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-outline" data-modal-close>Cancel</button>
+              <button type="submit" class="btn btn-primary"><i class="fa-solid fa-hand-holding-medical"></i> Dispense</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+<script src="../js/master.js"></script>
+</body>
+</html>

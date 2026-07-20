@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reports | AlagaGo Clinic</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="../css/master.css">
+  <script src="/session-guard.js"></script>
+  
+</head>
+<body>
+<div class="app">
+  <!-- ===== Sidebar ===== -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <div class="brand-icon"><i class="fa-solid fa-staff-snake"></i></div>
+      <div class="brand-text"><strong>AlagaGo</strong><small>Admin Panel</small></div>
+    </div>
+    <nav class="sidebar-nav">
+      <span class="nav-label">Main</span>
+        <a href="index.html" class="nav-link"><i class="fa-solid fa-gauge-high"></i><span>Dashboard</span></a>
+      <span class="nav-label">Management</span>
+        <a href="users.html" class="nav-link"><i class="fa-solid fa-users-gear"></i><span>User Management</span></a>
+        <a href="records.html" class="nav-link"><i class="fa-solid fa-file-medical"></i><span>Medical Records</span></a>
+        <a href="consultations.html" class="nav-link"><i class="fa-solid fa-stethoscope"></i><span>Consultations</span></a>
+        <a href="appointments.html" class="nav-link"><i class="fa-solid fa-calendar-check"></i><span>Appointments</span></a>
+      <span class="nav-label">Pharmacy</span>
+        <a href="inventory.html" class="nav-link"><i class="fa-solid fa-pills"></i><span>Medicine Inventory</span></a>
+        <a href="dispensing.html" class="nav-link"><i class="fa-solid fa-prescription-bottle-medical"></i><span>Dispensing</span></a>
+      <span class="nav-label">Services</span>
+        <a href="emergency.html" class="nav-link"><i class="fa-solid fa-truck-medical"></i><span>Incident & Emergency</span></a>
+        <a href="programs.html" class="nav-link"><i class="fa-solid fa-heart-pulse"></i><span>Health Programs</span></a>
+        <a href="clearance.html" class="nav-link"><i class="fa-solid fa-file-circle-check"></i><span>Health Clearance</span></a>
+      <span class="nav-label">System</span>
+        <a href="reports.html" class="nav-link"><i class="fa-solid fa-chart-line"></i><span>Reports</span></a>
+        <a href="settings.html" class="nav-link"><i class="fa-solid fa-gear"></i><span>Settings</span></a>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="#" onclick="logout(); return false;" class="dropdown-item text-danger">
+        <i class="fa-solid fa-arrow-right-from-bracket"></i> Log Out
+      </a>
+    </div>
+  </aside>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+  <!-- ===== Main ===== -->
+  <div class="main">
+  <!-- ===== Topbar ===== -->
+  <header class="topbar">
+    <button class="icon-btn" id="sidebarToggle"><i class="fa-solid fa-bars"></i></button>
+    <div class="search-box">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <input type="text" placeholder="Search reports..." data-table-search="mainTable">
+    </div>
+    <div class="topbar-actions">
+      <div class="dropdown">
+        <button class="icon-btn" data-dropdown-toggle="notifDropdown"><i class="fa-solid fa-bell"></i><span class="dot"></span></button>
+        <div class="dropdown-menu dropdown-menu-wide" id="notifDropdown">
+          <div class="dropdown-head">Notifications</div>
+          <a href="#" class="dropdown-item"><i class="fa-solid fa-calendar-check"></i> New appointment booked</a>
+          <a href="#" class="dropdown-item"><i class="fa-solid fa-pills"></i> Low stock alert: Paracetamol</a>
+          <a href="#" class="dropdown-item"><i class="fa-solid fa-file-circle-check"></i> 3 clearance requests pending</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button class="user-chip" data-dropdown-toggle="userDropdown">
+          <span class="avatar">AD</span>
+          <span class="user-meta"><strong>Admin User</strong><small>Administrator</small></span>
+          <i class="fa-solid fa-chevron-down"></i>
+        </button>
+        <div class="dropdown-menu" id="userDropdown">
+          <a href="settings.html" class="dropdown-item"><i class="fa-solid fa-user"></i> My Profile</a>
+          <a href="#" class="dropdown-item"><i class="fa-solid fa-gear"></i> Preferences</a>
+          <div class="dropdown-divider"></div>
+          <a href="#" onclick="logout(); return false;" class="dropdown-item text-danger">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i> Log Out
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+    <main class="content">
+
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">Reports</h1>
+          <p class="page-subtitle">Generate and download clinic reports.</p>
+        </div>
+        <div class="page-actions">
+          <input type="date" class="form-control" style="width:auto">
+          <input type="date" class="form-control" style="width:auto">
+          <button class="btn btn-primary" data-toast="Report generated for selected range"><i class="fa-solid fa-filter"></i> Apply</button>
+        </div>
+      </div>
+
+      <div class="grid-3">
+        <div class="report-card">
+          <div class="list-icon bg-blue"><i class="fa-solid fa-user-injured"></i></div>
+          <h4>Patient Visits Report</h4>
+          <p>Daily and monthly summary of clinic patient visits.</p>
+          <div class="report-formats"><span class="badge badge-danger">PDF</span><span class="badge badge-success">Excel</span></div>
+          <button class="btn btn-outline btn-sm" data-toast="Patient Visits Report downloaded"><i class="fa-solid fa-download"></i> Download</button>
+        </div>
+        <div class="report-card">
+          <div class="list-icon bg-teal"><i class="fa-solid fa-pills"></i></div>
+          <h4>Medicine Usage Report</h4>
+          <p>Dispensed medicines and stock movement summary.</p>
+          <div class="report-formats"><span class="badge badge-danger">PDF</span><span class="badge badge-success">Excel</span></div>
+          <button class="btn btn-outline btn-sm" data-toast="Medicine Usage Report downloaded"><i class="fa-solid fa-download"></i> Download</button>
+        </div>
+        <div class="report-card">
+          <div class="list-icon bg-purple"><i class="fa-solid fa-stethoscope"></i></div>
+          <h4>Consultation Summary</h4>
+          <p>Walk-in and scheduled consultation trends.</p>
+          <div class="report-formats"><span class="badge badge-danger">PDF</span></div>
+          <button class="btn btn-outline btn-sm" data-toast="Consultation Summary downloaded"><i class="fa-solid fa-download"></i> Download</button>
+        </div>
+        <div class="report-card">
+          <div class="list-icon bg-red"><i class="fa-solid fa-truck-medical"></i></div>
+          <h4>Incident Report</h4>
+          <p>Emergency cases grouped by type and severity.</p>
+          <div class="report-formats"><span class="badge badge-danger">PDF</span><span class="badge badge-success">Excel</span></div>
+          <button class="btn btn-outline btn-sm" data-toast="Incident Report downloaded"><i class="fa-solid fa-download"></i> Download</button>
+        </div>
+        <div class="report-card">
+          <div class="list-icon bg-green"><i class="fa-solid fa-file-circle-check"></i></div>
+          <h4>Clearance Report</h4>
+          <p>Issued and pending health clearances.</p>
+          <div class="report-formats"><span class="badge badge-success">Excel</span></div>
+          <button class="btn btn-outline btn-sm" data-toast="Clearance Report downloaded"><i class="fa-solid fa-download"></i> Download</button>
+        </div>
+        <div class="report-card">
+          <div class="list-icon bg-amber"><i class="fa-solid fa-heart-pulse"></i></div>
+          <h4>Program Participation</h4>
+          <p>Health program attendance and reach statistics.</p>
+          <div class="report-formats"><span class="badge badge-danger">PDF</span></div>
+          <button class="btn btn-outline btn-sm" data-toast="Program Participation downloaded"><i class="fa-solid fa-download"></i> Download</button>
+        </div>
+      </div>
+
+      <div class="card mt-2">
+        <div class="card-header"><h3 class="card-title"><i class="fa-solid fa-clock-rotate-left"></i> Recently Generated</h3></div>
+        <div class="table-wrap">
+          <table class="table" id="mainTable">
+            <thead><tr><th>Report Name</th><th>Generated By</th><th>Date</th><th>Format</th><th>Actions</th></tr></thead>
+            <tbody>
+              <tr><td class="fw-bold">Patient Visits &mdash; February 2025</td><td>Admin User</td><td>Mar 01, 2025</td><td><span class="badge badge-danger">PDF</span></td>
+                <td><div class="table-actions"><button class="action-btn" data-toast="Report downloaded"><i class="fa-solid fa-download"></i></button></div></td></tr>
+              <tr><td class="fw-bold">Medicine Usage &mdash; February 2025</td><td>Admin User</td><td>Mar 01, 2025</td><td><span class="badge badge-success">Excel</span></td>
+                <td><div class="table-actions"><button class="action-btn" data-toast="Report downloaded"><i class="fa-solid fa-download"></i></button></div></td></tr>
+              <tr><td class="fw-bold">Incident Report &mdash; Q4 2024</td><td>Dr. Sarah Reyes</td><td>Jan 05, 2025</td><td><span class="badge badge-danger">PDF</span></td>
+                <td><div class="table-actions"><button class="action-btn" data-toast="Report downloaded"><i class="fa-solid fa-download"></i></button></div></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+<script src="../js/master.js"></script>
+</body>
+</html>

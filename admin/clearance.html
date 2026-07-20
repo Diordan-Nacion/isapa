@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Health Clearance | AlagaGo Clinic</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="../css/master.css">
+  <script src="/session-guard.js"></script>
+</head>
+<body>
+<div class="app">
+  <!-- ===== Sidebar ===== -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <div class="brand-icon"><i class="fa-solid fa-staff-snake"></i></div>
+      <div class="brand-text"><strong>AlagaGo</strong><small>Admin Panel</small></div>
+    </div>
+    <nav class="sidebar-nav">
+      <span class="nav-label">Main</span>
+        <a href="index.html" class="nav-link"><i class="fa-solid fa-gauge-high"></i><span>Dashboard</span></a>
+      <span class="nav-label">Management</span>
+        <a href="users.html" class="nav-link"><i class="fa-solid fa-users-gear"></i><span>User Management</span></a>
+        <a href="records.html" class="nav-link"><i class="fa-solid fa-file-medical"></i><span>Medical Records</span></a>
+        <a href="consultations.html" class="nav-link"><i class="fa-solid fa-stethoscope"></i><span>Consultations</span></a>
+        <a href="appointments.html" class="nav-link"><i class="fa-solid fa-calendar-check"></i><span>Appointments</span></a>
+      <span class="nav-label">Pharmacy</span>
+        <a href="inventory.html" class="nav-link"><i class="fa-solid fa-pills"></i><span>Medicine Inventory</span></a>
+        <a href="dispensing.html" class="nav-link"><i class="fa-solid fa-prescription-bottle-medical"></i><span>Dispensing</span></a>
+      <span class="nav-label">Services</span>
+        <a href="emergency.html" class="nav-link"><i class="fa-solid fa-truck-medical"></i><span>Incident & Emergency</span></a>
+        <a href="programs.html" class="nav-link"><i class="fa-solid fa-heart-pulse"></i><span>Health Programs</span></a>
+        <a href="clearance.html" class="nav-link"><i class="fa-solid fa-file-circle-check"></i><span>Health Clearance</span></a>
+      <span class="nav-label">System</span>
+        <a href="reports.html" class="nav-link"><i class="fa-solid fa-chart-line"></i><span>Reports</span></a>
+        <a href="settings.html" class="nav-link"><i class="fa-solid fa-gear"></i><span>Settings</span></a>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="#" onclick="logout(); return false;" class="dropdown-item text-danger">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i> Log Out
+          </a>
+    </div>
+  </aside>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+  <!-- ===== Main ===== -->
+  <div class="main">
+  <!-- ===== Topbar ===== -->
+  <header class="topbar">
+    <button class="icon-btn" id="sidebarToggle"><i class="fa-solid fa-bars"></i></button>
+    <div class="search-box">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <input type="text" placeholder="Search clearances..." data-table-search="mainTable">
+    </div>
+    <div class="topbar-actions">
+      <div class="dropdown">
+        <button class="icon-btn" data-dropdown-toggle="notifDropdown"><i class="fa-solid fa-bell"></i><span class="dot"></span></button>
+        <div class="dropdown-menu dropdown-menu-wide" id="notifDropdown">
+          <div class="dropdown-head">Notifications</div>
+          <a href="#" class="dropdown-item"><i class="fa-solid fa-calendar-check"></i> New appointment booked</a>
+          <a href="#" class="dropdown-item"><i class="fa-solid fa-pills"></i> Low stock alert: Paracetamol</a>
+          <a href="#" class="dropdown-item"><i class="fa-solid fa-file-circle-check"></i> 3 clearance requests pending</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button class="user-chip" data-dropdown-toggle="userDropdown">
+          <span class="avatar">AD</span>
+          <span class="user-meta"><strong>Admin User</strong><small>Administrator</small></span>
+          <i class="fa-solid fa-chevron-down"></i>
+        </button>
+        <div class="dropdown-menu" id="userDropdown">
+          <a href="settings.html" class="dropdown-item"><i class="fa-solid fa-user"></i> My Profile</a>
+          <a href="#" class="dropdown-item"><i class="fa-solid fa-gear"></i> Preferences</a>
+          <div class="dropdown-divider"></div>
+          <a href="#" onclick="logout(); return false;" class="dropdown-item text-danger">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i> Log Out
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+    <main class="content">
+
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">Health Clearance</h1>
+          <p class="page-subtitle">Review requests and issue student health clearances.</p>
+        </div>
+        <div class="page-actions">
+          <button class="btn btn-primary" data-modal-open="clearanceModal"><i class="fa-solid fa-file-circle-plus"></i> Issue Clearance</button>
+        </div>
+      </div>
+
+      <div class="stats-grid" style="grid-template-columns:repeat(3,1fr)">
+        <div class="stat-card"><div class="stat-icon bg-amber"><i class="fa-solid fa-clock"></i></div><div><span class="stat-value">0</span><span class="stat-label">Pending Requests</span></div></div>
+        <div class="stat-card"><div class="stat-icon bg-teal"><i class="fa-solid fa-file-circle-check"></i></div><div><span class="stat-value">0</span><span class="stat-label">Issued This Month</span></div></div>
+        <div class="stat-card"><div class="stat-icon bg-blue"><i class="fa-solid fa-folder-open"></i></div><div><span class="stat-value">0</span><span class="stat-label">Total Issued</span></div></div>
+      </div>
+
+      <div class="card">
+        <div class="table-wrap">
+          <table class="table" id="mainTable">
+            <thead><tr><th>Clearance ID</th><th>Student</th><th>Purpose</th><th>Request Date</th><th>Valid Until</th><th>Status</th><th>Actions</th></tr></thead>
+            <tbody>
+              <tr><td class="fw-bold">HC-2210</td><td>Juan Dela Cruz</td><td>OJT Requirement</td><td>Mar 09, 2025</td><td>Sep 09, 2025</td><td><span class="badge badge-success">Issued</span></td>
+                <td><div class="table-actions"><button class="action-btn" data-toast="Clearance printed" data-toast-type="info" title="Print"><i class="fa-solid fa-print"></i></button></div></td></tr>
+              <tr><td class="fw-bold">HC-2209</td><td>Maria Santos</td><td>Enrollment</td><td>Mar 08, 2025</td><td>&mdash;</td><td><span class="badge badge-warning">Pending</span></td>
+                <td><div class="table-actions"><button class="action-btn success" data-modal-open="clearanceModal" title="Issue"><i class="fa-solid fa-stamp"></i></button><button class="action-btn danger" data-toast="Request rejected" data-toast-type="danger" title="Reject"><i class="fa-solid fa-xmark"></i></button></div></td></tr>
+              <tr><td class="fw-bold">HC-2208</td><td>Carlo Aquino</td><td>Sports (Varsity)</td><td>Mar 08, 2025</td><td>Mar 08, 2026</td><td><span class="badge badge-success">Issued</span></td>
+                <td><div class="table-actions"><button class="action-btn" data-toast="Clearance printed" data-toast-type="info" title="Print"><i class="fa-solid fa-print"></i></button></div></td></tr>
+              <tr><td class="fw-bold">HC-2207</td><td>Sofia Mendoza</td><td>Scholarship</td><td>Mar 07, 2025</td><td>&mdash;</td><td><span class="badge badge-warning">Pending</span></td>
+                <td><div class="table-actions"><button class="action-btn success" data-modal-open="clearanceModal" title="Issue"><i class="fa-solid fa-stamp"></i></button><button class="action-btn danger" data-toast="Request rejected" data-toast-type="danger" title="Reject"><i class="fa-solid fa-xmark"></i></button></div></td></tr>
+              <tr><td class="fw-bold">HC-2206</td><td>Ana Reyes</td><td>OJT Requirement</td><td>Mar 06, 2025</td><td>&mdash;</td><td><span class="badge badge-danger">Rejected</span></td>
+                <td><div class="table-actions"><button class="action-btn" data-toast="Opening request HC-2206" data-toast-type="info" title="View"><i class="fa-solid fa-eye"></i></button></div></td></tr>
+              <tr><td class="fw-bold">HC-2205</td><td>Mark Villanueva</td><td>Enrollment</td><td>Mar 05, 2025</td><td>Sep 05, 2025</td><td><span class="badge badge-success">Issued</span></td>
+                <td><div class="table-actions"><button class="action-btn" data-toast="Clearance printed" data-toast-type="info" title="Print"><i class="fa-solid fa-print"></i></button></div></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Issue Clearance Modal -->
+      <div class="modal-overlay" id="clearanceModal">
+        <div class="modal">
+          <div class="modal-header">
+            <h3 class="modal-title"><i class="fa-solid fa-file-circle-check"></i> Issue Health Clearance</h3>
+            <button class="modal-close" data-modal-close><i class="fa-solid fa-xmark"></i></button>
+          </div>
+          <form class="js-demo-form" data-toast="Clearance issued successfully">
+            <div class="modal-body">
+              <div class="form-group"><label class="form-label">Student Name <span class="req">*</span></label><input type="text" class="form-control" placeholder="Enter student name" required></div>
+              <div class="form-row">
+                <div class="form-group"><label class="form-label">Purpose <span class="req">*</span></label>
+                  <select class="form-control" required><option value="">Select purpose</option><option>Enrollment</option><option>OJT Requirement</option><option>Sports (Varsity)</option><option>Scholarship</option><option>Other</option></select>
+                </div>
+                <div class="form-group"><label class="form-label">Valid Until</label><input type="date" class="form-control"></div>
+              </div>
+              <div class="form-group"><label class="form-label">Medical Findings <span class="req">*</span></label>
+                <select class="form-control" required><option value="">Select findings</option><option>Fit</option><option>Fit with Conditions</option><option>Not Fit</option></select>
+              </div>
+              <div class="form-group"><label class="form-label">Remarks</label><textarea class="form-control" placeholder="Additional remarks..."></textarea></div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-outline" data-modal-close>Cancel</button>
+              <button type="submit" class="btn btn-primary"><i class="fa-solid fa-stamp"></i> Issue Clearance</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+<script src="../js/master.js"></script>
+</body>
+</html>

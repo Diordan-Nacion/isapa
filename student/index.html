@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard | AlagaGo Clinic</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="../css/master.css">
+  <script src="/session-guard.js"></script>
+  
+</head>
+<body>
+<div class="app">
+  <!-- ===== Sidebar ===== -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <div class="brand-icon"><i class="fa-solid fa-staff-snake"></i></div>
+      <div class="brand-text"><strong>AlagaGo</strong><small>Student Portal</small></div>
+    </div>
+    <nav class="sidebar-nav">
+      <span class="nav-label">Main</span>
+        <a href="index.html" class="nav-link"><i class="fa-solid fa-gauge-high"></i><span>Dashboard</span></a>
+      <span class="nav-label">Health</span>
+        <a href="records.html" class="nav-link"><i class="fa-solid fa-file-medical"></i><span>My Medical Record</span></a>
+        <a href="medicines.html" class="nav-link"><i class="fa-solid fa-capsules"></i><span>My Medicines</span></a>
+        <a href="clearance.html" class="nav-link"><i class="fa-solid fa-file-circle-check"></i><span>Health Clearance</span></a>
+      <span class="nav-label">Services</span>
+        <a href="appointments.html" class="nav-link"><i class="fa-solid fa-calendar-check"></i><span>Appointments</span></a>
+        <a href="incidents.html" class="nav-link"><i class="fa-solid fa-file-circle-exclamation"></i><span>Incident History</span></a>
+        <a href="programs.html" class="nav-link"><i class="fa-solid fa-heart-pulse"></i><span>Health Programs</span></a>
+      <span class="nav-label">Account</span>
+        <a href="profile.html" class="nav-link"><i class="fa-solid fa-user"></i><span>My Profile</span></a>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="#" onclick="logout(); return false;" class="dropdown-item text-danger">
+        <i class="fa-solid fa-arrow-right-from-bracket"></i> Log Out
+      </a>
+    </div>
+  </aside>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+  <!-- ===== Main ===== -->
+  <div class="main">
+  <!-- ===== Topbar ===== -->
+  <header class="topbar">
+    <button class="icon-btn" id="sidebarToggle"><i class="fa-solid fa-bars"></i></button>
+    <div class="search-box">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <input type="text" placeholder="Search..." data-table-search="mainTable">
+    </div>
+    <div class="topbar-actions">
+      <div class="dropdown">
+        <button class="icon-btn" data-dropdown-toggle="notifDropdown"><i class="fa-solid fa-bell"></i><span class="dot"></span></button>
+        <div class="dropdown-menu dropdown-menu-wide" id="notifDropdown">
+          <div class="dropdown-head">Notifications</div>
+          <a href="#" class="dropdown-item"><i class="fa-solid fa-calendar-check"></i> New appointment booked</a>
+          <a href="#" class="dropdown-item"><i class="fa-solid fa-pills"></i> Low stock alert: Paracetamol</a>
+          <a href="#" class="dropdown-item"><i class="fa-solid fa-file-circle-check"></i> 3 clearance requests pending</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button class="user-chip" data-dropdown-toggle="userDropdown">
+          <span class="avatar">KG</span>
+          <span class="user-meta"><strong>Kenji Gorgod</strong><small>Student - BSIT 3rd Year</small></span>
+          <i class="fa-solid fa-chevron-down"></i>
+        </button>
+        <div class="dropdown-menu" id="userDropdown">
+          <a href="profile.html" class="dropdown-item"><i class="fa-solid fa-user"></i> My Profile</a>
+          <a href="#" class="dropdown-item"><i class="fa-solid fa-gear"></i> Preferences</a>
+          <div class="dropdown-divider"></div>
+          <a href="#" onclick="logout(); return false;" class="dropdown-item text-danger">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i> Log Out
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+    <main class="content">
+
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">Welcome back, Kenji!</h1>
+          <p class="page-subtitle">Stay on top of your health records and appointments.</p>
+        </div>
+        <div class="page-actions">
+          <a href="appointments.html" class="btn btn-primary"><i class="fa-solid fa-calendar-plus"></i> Book Appointment</a>
+        </div>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card"><div class="stat-icon bg-blue"><i class="fa-solid fa-hospital-user"></i></div><div><span class="stat-value">0</span><span class="stat-label">Total Visits</span></div></div>
+        <div class="stat-card"><div class="stat-icon bg-purple"><i class="fa-solid fa-calendar-check"></i></div><div><span class="stat-value">0</span><span class="stat-label">Upcoming Appointments</span></div></div>
+        <div class="stat-card"><div class="stat-icon bg-teal"><i class="fa-solid fa-file-circle-check"></i></div><div><span class="stat-value">0</span><span class="stat-label">Active Clearances</span></div></div>
+        <div class="stat-card"><div class="stat-icon bg-amber"><i class="fa-solid fa-capsules"></i></div><div><span class="stat-value">0</span><span class="stat-label">Current Medicines</span></div></div>
+      </div>
+
+      <!-- Quick actions -->
+      <div class="grid-4" style="margin-bottom:24px">
+        <a href="appointments.html" class="quick-card">
+          <div class="list-icon bg-blue"><i class="fa-solid fa-calendar-plus"></i></div>
+          <strong>Book Appointment</strong><small>Schedule a clinic visit</small>
+          <span class="go">Go <i class="fa-solid fa-arrow-right"></i></span>
+        </a>
+        <a href="records.html" class="quick-card">
+          <div class="list-icon bg-teal"><i class="fa-solid fa-file-medical"></i></div>
+          <strong>My Records</strong><small>View medical history</small>
+          <span class="go">Go <i class="fa-solid fa-arrow-right"></i></span>
+        </a>
+        <a href="clearance.html" class="quick-card">
+          <div class="list-icon bg-purple"><i class="fa-solid fa-file-circle-plus"></i></div>
+          <strong>Request Clearance</strong><small>For OJT, sports, enrollment</small>
+          <span class="go">Go <i class="fa-solid fa-arrow-right"></i></span>
+        </a>
+        <a href="programs.html" class="quick-card">
+          <div class="list-icon bg-amber"><i class="fa-solid fa-heart-pulse"></i></div>
+          <strong>Health Programs</strong><small>Join clinic activities</small>
+          <span class="go">Go <i class="fa-solid fa-arrow-right"></i></span>
+        </a>
+      </div>
+
+      <div class="grid-2-1">
+        <!-- Recent visits -->
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title"><i class="fa-solid fa-clock-rotate-left"></i> Recent Visits</h3>
+            <a href="records.html" class="card-link">View full record</a>
+          </div>
+          <div class="table-wrap">
+            <table class="table" id="mainTable">
+              <thead><tr><th>Date</th><th>Type</th><th>Diagnosis / Reason</th><th>Attending</th></tr></thead>
+              <tbody>
+                <tr><td class="nowrap">Mar 08, 2025</td><td><span class="badge badge-info">Consultation</span></td><td>Migraine</td><td>Dr. Michael Tan</td></tr>
+                <tr><td class="nowrap">Feb 25, 2025</td><td><span class="badge badge-purple">Check-up</span></td><td>Annual physical exam</td><td>Nurse Grace Lim</td></tr>
+                <tr><td class="nowrap">Feb 10, 2025</td><td><span class="badge badge-info">Consultation</span></td><td>Flu symptoms</td><td>Dr. Sarah Reyes</td></tr>
+                <tr><td class="nowrap">Jan 28, 2025</td><td><span class="badge badge-teal">Dental</span></td><td>Teeth cleaning</td><td>Dr. Michael Tan</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div>
+          <!-- Next appointment -->
+          <div class="card">
+            <div class="card-header"><h3 class="card-title"><i class="fa-solid fa-calendar-day"></i> Next Appointment</h3></div>
+            <div class="card-body">
+              <div class="appt-highlight">
+                <div class="date-block"><span class="d">12</span><span class="m">Mar</span></div>
+                <div>
+                  <strong>1:00 PM &mdash; Dr. Sarah Reyes</strong>
+                  <p class="text-muted mb-0" style="font-size:12.5px">Consultation &middot; Migraine follow-up</p>
+                  <span class="badge badge-success mt-1">Confirmed</span>
+                </div>
+              </div>
+              <div class="list-item" style="padding:12px 0;border:none">
+                <div class="list-icon bg-blue"><i class="fa-solid fa-tooth"></i></div>
+                <div class="list-body"><p class="list-title">Dental &mdash; Dr. Michael Tan</p><p class="list-sub">Mar 18, 2025 &middot; 9:30 AM</p></div>
+                <span class="badge badge-warning">Pending</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Health tip -->
+          <div class="card">
+            <div class="card-body d-flex" style="align-items:flex-start;gap:14px">
+              <div class="list-icon bg-amber"><i class="fa-solid fa-lightbulb"></i></div>
+              <div>
+                <strong>Health Tip of the Day</strong>
+                <p class="text-muted mb-0" style="font-size:13px">Drink at least 8 glasses of water daily and get 7&ndash;8 hours of sleep to keep your immune system strong.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+<script src="../js/master.js"></script>
+</body>
+</html>

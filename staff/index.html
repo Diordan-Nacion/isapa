@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard | AlagaGo Clinic</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="../css/master.css">
+  <script src="/session-guard.js"></script>
+
+</head>
+<body>
+<div class="app">
+  <!-- ===== Sidebar ===== -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <div class="brand-icon"><i class="fa-solid fa-staff-snake"></i></div>
+      <div class="brand-text"><strong>AlagaGo</strong><small>Staff Portal</small></div>
+    </div>
+    <nav class="sidebar-nav">
+      <span class="nav-label">Main</span>
+        <a href="index.html" class="nav-link"><i class="fa-solid fa-gauge-high"></i><span>Dashboard</span></a>
+      <span class="nav-label">Clinic</span>
+        <a href="records.html" class="nav-link"><i class="fa-solid fa-file-medical"></i><span>Medical Records</span></a>
+        <a href="consultations.html" class="nav-link"><i class="fa-solid fa-stethoscope"></i><span>Consultations</span></a>
+        <a href="appointments.html" class="nav-link"><i class="fa-solid fa-calendar-check"></i><span>Appointments</span></a>
+      <span class="nav-label">Pharmacy</span>
+        <a href="inventory.html" class="nav-link"><i class="fa-solid fa-pills"></i><span>Medicine Inventory</span></a>
+        <a href="dispensing.html" class="nav-link"><i class="fa-solid fa-prescription-bottle-medical"></i><span>Dispensing</span></a>
+      <span class="nav-label">Services</span>
+        <a href="emergency.html" class="nav-link"><i class="fa-solid fa-truck-medical"></i><span>Incident & Emergency</span></a>
+        <a href="programs.html" class="nav-link"><i class="fa-solid fa-heart-pulse"></i><span>Health Programs</span></a>
+        <a href="clearance.html" class="nav-link"><i class="fa-solid fa-file-circle-check"></i><span>Health Clearance</span></a>
+      <span class="nav-label">System</span>
+        <a href="reports.html" class="nav-link"><i class="fa-solid fa-chart-line"></i><span>Reports</span></a>
+        <a href="profile.html" class="nav-link"><i class="fa-solid fa-user-doctor"></i><span>My Profile</span></a>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="#" onclick="logout(); return false;" class="dropdown-item text-danger">
+        <i class="fa-solid fa-arrow-right-from-bracket"></i> Log Out
+      </a>
+    </div>
+  </aside>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+  <!-- ===== Main ===== -->
+  <div class="main">
+  <!-- ===== Topbar ===== -->
+  <header class="topbar">
+    <button class="icon-btn" id="sidebarToggle"><i class="fa-solid fa-bars"></i></button>
+    <div class="search-box">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <input type="text" placeholder="Search..." data-table-search="mainTable">
+    </div>
+    <div class="topbar-actions">
+      <div class="dropdown">
+        <button class="icon-btn" data-dropdown-toggle="notifDropdown"><i class="fa-solid fa-bell"></i><span class="dot"></span></button>
+        <div class="dropdown-menu dropdown-menu-wide" id="notifDropdown">
+          <div class="dropdown-head">Notifications</div>
+          <a href="#" class="dropdown-item"><i class="fa-solid fa-calendar-check"></i> New appointment booked</a>
+          <a href="#" class="dropdown-item"><i class="fa-solid fa-pills"></i> Low stock alert: Paracetamol</a>
+          <a href="#" class="dropdown-item"><i class="fa-solid fa-file-circle-check"></i> 3 clearance requests pending</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button class="user-chip" data-dropdown-toggle="userDropdown">
+          <span class="avatar">KM</span>
+          <span class="user-meta"><strong>Nurse Keneth Manlunas</strong><small>Clinic Nurse</small></span>
+          <i class="fa-solid fa-chevron-down"></i>
+        </button>
+        <div class="dropdown-menu" id="userDropdown">
+          <a href="profile.html" class="dropdown-item"><i class="fa-solid fa-user"></i> My Profile</a>
+          <a href="#" class="dropdown-item"><i class="fa-solid fa-gear"></i> Preferences</a>
+          <div class="dropdown-divider"></div>
+          <a href="#" onclick="logout(); return false;" class="dropdown-item text-danger">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i> Log Out
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+    <main class="content">
+
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">Good day, Nurse Manlunas!</h1>
+          <p class="page-subtitle">Here's your schedule and clinic updates for today.</p>
+        </div>
+        <div class="page-actions">
+          <button class="btn btn-outline" data-modal-open="dispenseModal"><i class="fa-solid fa-prescription-bottle-medical"></i> Quick Dispense</button>
+          <a href="consultations.html" class="btn btn-primary"><i class="fa-solid fa-stethoscope"></i> New Consultation</a>
+        </div>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card"><div class="stat-icon bg-blue"><i class="fa-solid fa-calendar-day"></i></div><div><span class="stat-value">0</span><span class="stat-label">My Appointments Today</span></div></div>
+        <div class="stat-card"><div class="stat-icon bg-teal"><i class="fa-solid fa-user-check"></i></div><div><span class="stat-value">0</span><span class="stat-label">Patients Attended</span></div></div>
+        <div class="stat-card"><div class="stat-icon bg-amber"><i class="fa-solid fa-prescription-bottle-medical"></i></div><div><span class="stat-value">0</span><span class="stat-label">Pending Dispense</span></div></div>
+        <div class="stat-card"><div class="stat-icon bg-purple"><i class="fa-solid fa-heart-pulse"></i></div><div><span class="stat-value">0</span><span class="stat-label">Active Programs</span></div></div>
+      </div>
+
+      <div class="grid-2-1">
+        <!-- My schedule -->
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title"><i class="fa-solid fa-calendar-check"></i> My Schedule Today</h3>
+            <a href="appointments.html" class="card-link">View all</a>
+          </div>
+          <div class="list-item">
+            <span class="time-pill">08:30 AM</span>
+            <div class="list-body"><p class="list-title">Juan Dela Cruz</p><p class="list-sub">Follow-up &mdash; Hypertension</p></div>
+            <span class="badge badge-success">Done</span>
+          </div>
+          <div class="list-item">
+            <span class="time-pill">09:00 AM</span>
+            <div class="list-body"><p class="list-title">Maria Santos</p><p class="list-sub">Check-up</p></div>
+            <span class="badge badge-success">Done</span>
+          </div>
+          <div class="list-item">
+            <span class="time-pill">10:15 AM</span>
+            <div class="list-body"><p class="list-title">Ana Reyes</p><p class="list-sub">Migraine follow-up</p></div>
+            <span class="badge badge-warning">In Progress</span>
+          </div>
+          <div class="list-item">
+            <span class="time-pill">01:00 PM</span>
+            <div class="list-body"><p class="list-title">Sofia Mendoza</p><p class="list-sub">Skin allergy</p></div>
+            <span class="badge badge-secondary">Upcoming</span>
+          </div>
+          <div class="list-item">
+            <span class="time-pill">02:30 PM</span>
+            <div class="list-body"><p class="list-title">Carlo Aquino</p><p class="list-sub">Medical certificate</p></div>
+            <span class="badge badge-secondary">Upcoming</span>
+          </div>
+        </div>
+
+        <div>
+          <!-- Quick dispense -->
+          <div class="card">
+            <div class="card-header"><h3 class="card-title"><i class="fa-solid fa-hand-holding-medical"></i> Quick Dispense</h3></div>
+            <div class="card-body">
+              <form class="js-demo-form" data-toast="Medicine dispensed successfully">
+                <div class="form-group"><label class="form-label">Patient ID / Name</label><input type="text" class="form-control" placeholder="STU-0000-000" required></div>
+                <div class="form-group"><label class="form-label">Medicine</label>
+                  <select class="form-control"><option>Paracetamol 500mg</option><option>Ibuprofen 400mg</option><option>Cetirizine 10mg</option><option>Loperamide 2mg</option><option>Oral Rehydration Salts</option></select>
+                </div>
+                <div class="form-group"><label class="form-label">Quantity</label><input type="number" class="form-control" placeholder="0" required></div>
+                <button type="submit" class="btn btn-primary btn-block"><i class="fa-solid fa-hand-holding-medical"></i> Dispense Now</button>
+              </form>
+            </div>
+          </div>
+
+          <!-- Alerts -->
+          <div class="card">
+            <div class="card-header"><h3 class="card-title"><i class="fa-solid fa-bell"></i> Alerts</h3></div>
+            <div class="list-item">
+              <div class="list-icon bg-amber"><i class="fa-solid fa-pills"></i></div>
+              <div class="list-body"><p class="list-title">Low stock</p><p class="list-sub">Paracetamol &mdash; 12 tabs left</p></div>
+            </div>
+            <div class="list-item">
+              <div class="list-icon bg-red"><i class="fa-solid fa-eye"></i></div>
+              <div class="list-body"><p class="list-title">Follow-up needed</p><p class="list-sub">Mark Villanueva &mdash; under observation</p></div>
+            </div>
+            <div class="list-item">
+              <div class="list-icon bg-purple"><i class="fa-solid fa-file-circle-check"></i></div>
+              <div class="list-body"><p class="list-title">Clearance review</p><p class="list-sub">3 requests pending approval</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dispense Modal -->
+      <div class="modal-overlay" id="dispenseModal">
+        <div class="modal">
+          <div class="modal-header">
+            <h3 class="modal-title"><i class="fa-solid fa-prescription-bottle-medical"></i> Dispense Medicine</h3>
+            <button class="modal-close" data-modal-close><i class="fa-solid fa-xmark"></i></button>
+          </div>
+          <form class="js-demo-form" data-toast="Medicine dispensed successfully">
+            <div class="modal-body">
+              <div class="form-group"><label class="form-label">Patient Name <span class="req">*</span></label><input type="text" class="form-control" placeholder="Enter patient name" required></div>
+              <div class="form-row">
+                <div class="form-group"><label class="form-label">Medicine <span class="req">*</span></label>
+                  <select class="form-control" required><option value="">Select medicine</option><option>Paracetamol 500mg</option><option>Ibuprofen 400mg</option><option>Cetirizine 10mg</option><option>Loperamide 2mg</option><option>Mefenamic Acid 500mg</option></select>
+                </div>
+                <div class="form-group"><label class="form-label">Quantity <span class="req">*</span></label><input type="number" class="form-control" placeholder="0" required></div>
+              </div>
+              <div class="form-group"><label class="form-label">Remarks</label><textarea class="form-control" placeholder="Dosage instructions"></textarea></div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-outline" data-modal-close>Cancel</button>
+              <button type="submit" class="btn btn-primary"><i class="fa-solid fa-hand-holding-medical"></i> Dispense</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+<script src="../js/master.js"></script>
+</body>
+</html>

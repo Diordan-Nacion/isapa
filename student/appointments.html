@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Appointments | AlagaGo Clinic</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="../css/master.css">
+  <script src="/session-guard.js"></script>
+</head>
+<body>
+<div class="app">
+  <!-- ===== Sidebar ===== -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <div class="brand-icon"><i class="fa-solid fa-staff-snake"></i></div>
+      <div class="brand-text"><strong>AlagaGo</strong><small>Student Portal</small></div>
+    </div>
+    <nav class="sidebar-nav">
+      <span class="nav-label">Main</span>
+        <a href="index.html" class="nav-link"><i class="fa-solid fa-gauge-high"></i><span>Dashboard</span></a>
+      <span class="nav-label">Health</span>
+        <a href="records.html" class="nav-link"><i class="fa-solid fa-file-medical"></i><span>My Medical Record</span></a>
+        <a href="medicines.html" class="nav-link"><i class="fa-solid fa-capsules"></i><span>My Medicines</span></a>
+        <a href="clearance.html" class="nav-link"><i class="fa-solid fa-file-circle-check"></i><span>Health Clearance</span></a>
+      <span class="nav-label">Services</span>
+        <a href="appointments.html" class="nav-link"><i class="fa-solid fa-calendar-check"></i><span>Appointments</span></a>
+        <a href="incidents.html" class="nav-link"><i class="fa-solid fa-file-circle-exclamation"></i><span>Incident History</span></a>
+        <a href="programs.html" class="nav-link"><i class="fa-solid fa-heart-pulse"></i><span>Health Programs</span></a>
+      <span class="nav-label">Account</span>
+        <a href="profile.html" class="nav-link"><i class="fa-solid fa-user"></i><span>My Profile</span></a>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="#" onclick="logout(); return false;" class="dropdown-item text-danger">
+        <i class="fa-solid fa-arrow-right-from-bracket"></i> Log Out
+      </a>
+    </div>
+  </aside>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+  <!-- ===== Main ===== -->
+  <div class="main">
+  <!-- ===== Topbar ===== -->
+  <header class="topbar">
+    <button class="icon-btn" id="sidebarToggle"><i class="fa-solid fa-bars"></i></button>
+    <div class="search-box">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <input type="text" placeholder="Search appointments..." data-table-search="mainTable">
+    </div>
+    <div class="topbar-actions">
+      <div class="dropdown">
+        <button class="icon-btn" data-dropdown-toggle="notifDropdown"><i class="fa-solid fa-bell"></i><span class="dot"></span></button>
+        <div class="dropdown-menu dropdown-menu-wide" id="notifDropdown">
+          <div class="dropdown-head">Notifications</div>
+          <a href="#" class="dropdown-item"><i class="fa-solid fa-calendar-check"></i> New appointment booked</a>
+          <a href="#" class="dropdown-item"><i class="fa-solid fa-pills"></i> Low stock alert: Paracetamol</a>
+          <a href="#" class="dropdown-item"><i class="fa-solid fa-file-circle-check"></i> 3 clearance requests pending</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button class="user-chip" data-dropdown-toggle="userDropdown">
+          <span class="avatar">MC</span>
+          <span class="user-meta"><strong>Maria Clara</strong><small>Student - BSIT 3rd Year</small></span>
+          <i class="fa-solid fa-chevron-down"></i>
+        </button>
+        <div class="dropdown-menu" id="userDropdown">
+          <a href="profile.html" class="dropdown-item"><i class="fa-solid fa-user"></i> My Profile</a>
+          <a href="#" class="dropdown-item"><i class="fa-solid fa-gear"></i> Preferences</a>
+          <div class="dropdown-divider"></div>
+          <a href="/index.html" class="dropdown-item text-danger"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+        </div>
+      </div>
+    </div>
+  </header>
+    <main class="content">
+
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">Appointments</h1>
+          <p class="page-subtitle">Book a clinic visit and track your upcoming appointments.</p>
+        </div>
+        <div class="page-actions">
+          <button class="btn btn-primary" data-modal-open="bookModal"><i class="fa-solid fa-calendar-plus"></i> Book Appointment</button>
+        </div>
+      </div>
+
+      <div class="tabs">
+        <button class="tab-btn active" data-filter="all">All</button>
+        <button class="tab-btn" data-filter="upcoming">Upcoming</button>
+        <button class="tab-btn" data-filter="past">Past</button>
+      </div>
+
+      <div class="card">
+        <div class="table-wrap">
+          <table class="table" id="mainTable">
+            <thead><tr><th>Date &amp; Time</th><th>Doctor / Staff</th><th>Type</th><th>Reason</th><th>Status</th><th>Actions</th></tr></thead>
+            <tbody>
+              <tr data-status="upcoming"><td class="nowrap fw-bold">Mar 12, 2025 &middot; 01:00 PM</td><td>Dr. Sarah Reyes</td><td>Consultation</td><td>Migraine follow-up</td><td><span class="badge badge-success">Confirmed</span></td>
+                <td><div class="table-actions"><button class="action-btn danger" data-toast="Appointment cancelled" data-toast-type="danger" title="Cancel"><i class="fa-solid fa-xmark"></i></button></div></td></tr>
+              <tr data-status="upcoming"><td class="nowrap fw-bold">Mar 18, 2025 &middot; 09:30 AM</td><td>Dr. Michael Tan</td><td>Dental</td><td>Tooth extraction evaluation</td><td><span class="badge badge-warning">Pending</span></td>
+                <td><div class="table-actions"><button class="action-btn danger" data-toast="Appointment cancelled" data-toast-type="danger" title="Cancel"><i class="fa-solid fa-xmark"></i></button></div></td></tr>
+              <tr data-status="past"><td class="nowrap fw-bold">Feb 25, 2025 &middot; 10:00 AM</td><td>Dr. Sarah Reyes</td><td>Check-up</td><td>Annual physical exam</td><td><span class="badge badge-secondary">Completed</span></td>
+                <td><div class="table-actions"><button class="action-btn" data-toast="Opening visit summary" data-toast-type="info" title="View"><i class="fa-solid fa-eye"></i></button></div></td></tr>
+              <tr data-status="past"><td class="nowrap fw-bold">Feb 10, 2025 &middot; 02:00 PM</td><td>Nurse Grace Lim</td><td>Consultation</td><td>Flu symptoms</td><td><span class="badge badge-secondary">Completed</span></td>
+                <td><div class="table-actions"><button class="action-btn" data-toast="Opening visit summary" data-toast-type="info" title="View"><i class="fa-solid fa-eye"></i></button></div></td></tr>
+              <tr data-status="past"><td class="nowrap fw-bold">Jan 28, 2025 &middot; 11:00 AM</td><td>Dr. Michael Tan</td><td>Dental</td><td>Teeth cleaning</td><td><span class="badge badge-danger">Cancelled</span></td>
+                <td><div class="table-actions"><button class="action-btn" data-modal-open="bookModal" title="Rebook"><i class="fa-solid fa-rotate-left"></i></button></div></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Book Appointment Modal -->
+      <div class="modal-overlay" id="bookModal">
+        <div class="modal">
+          <div class="modal-header">
+            <h3 class="modal-title"><i class="fa-solid fa-calendar-plus"></i> Book an Appointment</h3>
+            <button class="modal-close" data-modal-close><i class="fa-solid fa-xmark"></i></button>
+          </div>
+          <form class="js-demo-form" data-toast="Appointment request submitted">
+            <div class="modal-body">
+              <div class="form-row">
+                <div class="form-group"><label class="form-label">Appointment Type <span class="req">*</span></label>
+                  <select class="form-control" required><option value="">Select type</option><option>Consultation</option><option>Check-up</option><option>Follow-up</option><option>Dental</option></select>
+                </div>
+                <div class="form-group"><label class="form-label">Preferred Doctor</label>
+                  <select class="form-control"><option>Dr. Sarah Reyes</option><option>Dr. Michael Tan</option><option>Nurse Grace Lim</option><option>No preference</option></select>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group"><label class="form-label">Preferred Date <span class="req">*</span></label><input type="date" class="form-control" required></div>
+                <div class="form-group"><label class="form-label">Time Slot <span class="req">*</span></label>
+                  <select class="form-control" required><option value="">Select slot</option><option>08:00 - 09:00 AM</option><option>09:00 - 10:00 AM</option><option>10:00 - 11:00 AM</option><option>01:00 - 02:00 PM</option><option>02:00 - 03:00 PM</option><option>03:00 - 04:00 PM</option></select>
+                </div>
+              </div>
+              <div class="form-group"><label class="form-label">Reason for Visit <span class="req">*</span></label><textarea class="form-control" placeholder="Describe your symptoms or reason..." required></textarea></div>
+              <div class="alert alert-info mb-0"><i class="fa-solid fa-circle-info"></i><div>Your request will be confirmed by clinic staff within the day.</div></div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-outline" data-modal-close>Cancel</button>
+              <button type="submit" class="btn btn-primary"><i class="fa-solid fa-paper-plane"></i> Submit Request</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+<script src="../js/master.js"></script>
+</body>
+</html>

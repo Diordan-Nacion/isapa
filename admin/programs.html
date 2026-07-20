@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Health Programs | AlagaGo Clinic</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="../css/master.css">
+  <script src="/session-guard.js"></script>
+  
+</head>
+<body>
+<div class="app">
+  <!-- ===== Sidebar ===== -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <div class="brand-icon"><i class="fa-solid fa-staff-snake"></i></div>
+      <div class="brand-text"><strong>AlagaGo</strong><small>Admin Panel</small></div>
+    </div>
+    <nav class="sidebar-nav">
+      <span class="nav-label">Main</span>
+        <a href="index.html" class="nav-link"><i class="fa-solid fa-gauge-high"></i><span>Dashboard</span></a>
+      <span class="nav-label">Management</span>
+        <a href="users.html" class="nav-link"><i class="fa-solid fa-users-gear"></i><span>User Management</span></a>
+        <a href="records.html" class="nav-link"><i class="fa-solid fa-file-medical"></i><span>Medical Records</span></a>
+        <a href="consultations.html" class="nav-link"><i class="fa-solid fa-stethoscope"></i><span>Consultations</span></a>
+        <a href="appointments.html" class="nav-link"><i class="fa-solid fa-calendar-check"></i><span>Appointments</span></a>
+      <span class="nav-label">Pharmacy</span>
+        <a href="inventory.html" class="nav-link"><i class="fa-solid fa-pills"></i><span>Medicine Inventory</span></a>
+        <a href="dispensing.html" class="nav-link"><i class="fa-solid fa-prescription-bottle-medical"></i><span>Dispensing</span></a>
+      <span class="nav-label">Services</span>
+        <a href="emergency.html" class="nav-link"><i class="fa-solid fa-truck-medical"></i><span>Incident & Emergency</span></a>
+        <a href="programs.html" class="nav-link"><i class="fa-solid fa-heart-pulse"></i><span>Health Programs</span></a>
+        <a href="clearance.html" class="nav-link"><i class="fa-solid fa-file-circle-check"></i><span>Health Clearance</span></a>
+      <span class="nav-label">System</span>
+        <a href="reports.html" class="nav-link"><i class="fa-solid fa-chart-line"></i><span>Reports</span></a>
+        <a href="settings.html" class="nav-link"><i class="fa-solid fa-gear"></i><span>Settings</span></a>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="#" onclick="logout(); return false;" class="dropdown-item text-danger">
+        <i class="fa-solid fa-arrow-right-from-bracket"></i> Log Out
+      </a>
+    </div>
+  </aside>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+  <!-- ===== Main ===== -->
+  <div class="main">
+  <!-- ===== Topbar ===== -->
+  <header class="topbar">
+    <button class="icon-btn" id="sidebarToggle"><i class="fa-solid fa-bars"></i></button>
+    <div class="search-box">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <input type="text" placeholder="Search programs..." data-table-search="mainTable">
+    </div>
+    <div class="topbar-actions">
+      <div class="dropdown">
+        <button class="icon-btn" data-dropdown-toggle="notifDropdown"><i class="fa-solid fa-bell"></i><span class="dot"></span></button>
+        <div class="dropdown-menu dropdown-menu-wide" id="notifDropdown">
+          <div class="dropdown-head">Notifications</div>
+          <a href="#" class="dropdown-item"><i class="fa-solid fa-calendar-check"></i> New appointment booked</a>
+          <a href="#" class="dropdown-item"><i class="fa-solid fa-pills"></i> Low stock alert: Paracetamol</a>
+          <a href="#" class="dropdown-item"><i class="fa-solid fa-file-circle-check"></i> 3 clearance requests pending</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button class="user-chip" data-dropdown-toggle="userDropdown">
+          <span class="avatar">AD</span>
+          <span class="user-meta"><strong>Admin User</strong><small>Administrator</small></span>
+          <i class="fa-solid fa-chevron-down"></i>
+        </button>
+        <div class="dropdown-menu" id="userDropdown">
+          <a href="settings.html" class="dropdown-item"><i class="fa-solid fa-user"></i> My Profile</a>
+          <a href="#" class="dropdown-item"><i class="fa-solid fa-gear"></i> Preferences</a>
+          <div class="dropdown-divider"></div>
+          <a href="#" onclick="logout(); return false;" class="dropdown-item text-danger">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i> Log Out
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+    <main class="content">
+
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">Health Programs</h1>
+          <p class="page-subtitle">Create and manage clinic health programs and campaigns.</p>
+        </div>
+        <div class="page-actions">
+          <button class="btn btn-primary" data-modal-open="programModal"><i class="fa-solid fa-plus"></i> Create Program</button>
+        </div>
+      </div>
+
+      <div class="grid-3">
+        <div class="program-card">
+          <div class="program-head"><div class="list-icon bg-teal"><i class="fa-solid fa-syringe"></i></div><span class="badge badge-success">Ongoing</span></div>
+          <h4>Anti-Dengue Vaccination Drive</h4>
+          <div class="program-meta">
+            <span><i class="fa-solid fa-calendar"></i> Mar 03 - 14, 2025</span>
+            <span><i class="fa-solid fa-location-dot"></i> Clinic &mdash; Room 1</span>
+            <span><i class="fa-solid fa-users"></i> 342 participants</span>
+          </div>
+          <div class="program-foot">
+            <button class="btn btn-outline btn-sm" data-modal-open="programModal"><i class="fa-solid fa-pen"></i> Edit</button>
+            <button class="btn btn-primary btn-sm" data-toast="Opening participant list"><i class="fa-solid fa-users"></i> Participants</button>
+          </div>
+        </div>
+        <div class="program-card">
+          <div class="program-head"><div class="list-icon bg-purple"><i class="fa-solid fa-brain"></i></div><span class="badge badge-info">Upcoming</span></div>
+          <h4>Mental Health Awareness Seminar</h4>
+          <div class="program-meta">
+            <span><i class="fa-solid fa-calendar"></i> Mar 20, 2025 &middot; 1:00 PM</span>
+            <span><i class="fa-solid fa-location-dot"></i> AVR Hall</span>
+            <span><i class="fa-solid fa-users"></i> 500 expected</span>
+          </div>
+          <div class="program-foot">
+            <button class="btn btn-outline btn-sm" data-modal-open="programModal"><i class="fa-solid fa-pen"></i> Edit</button>
+            <button class="btn btn-primary btn-sm" data-toast="Opening participant list"><i class="fa-solid fa-users"></i> Participants</button>
+          </div>
+        </div>
+        <div class="program-card">
+          <div class="program-head"><div class="list-icon bg-blue"><i class="fa-solid fa-tooth"></i></div><span class="badge badge-info">Upcoming</span></div>
+          <h4>Free Dental Check-up</h4>
+          <div class="program-meta">
+            <span><i class="fa-solid fa-calendar"></i> Mar 25 - 27, 2025</span>
+            <span><i class="fa-solid fa-location-dot"></i> Dental Room</span>
+            <span><i class="fa-solid fa-users"></i> 280 registered</span>
+          </div>
+          <div class="program-foot">
+            <button class="btn btn-outline btn-sm" data-modal-open="programModal"><i class="fa-solid fa-pen"></i> Edit</button>
+            <button class="btn btn-primary btn-sm" data-toast="Opening participant list"><i class="fa-solid fa-users"></i> Participants</button>
+          </div>
+        </div>
+        <div class="program-card">
+          <div class="program-head"><div class="list-icon bg-amber"><i class="fa-solid fa-weight-scale"></i></div><span class="badge badge-success">Ongoing</span></div>
+          <h4>BMI &amp; Nutrition Screening</h4>
+          <div class="program-meta">
+            <span><i class="fa-solid fa-calendar"></i> Mar 10 - 21, 2025</span>
+            <span><i class="fa-solid fa-location-dot"></i> Clinic Lobby</span>
+            <span><i class="fa-solid fa-users"></i> 410 screened</span>
+          </div>
+          <div class="program-foot">
+            <button class="btn btn-outline btn-sm" data-modal-open="programModal"><i class="fa-solid fa-pen"></i> Edit</button>
+            <button class="btn btn-primary btn-sm" data-toast="Opening participant list"><i class="fa-solid fa-users"></i> Participants</button>
+          </div>
+        </div>
+        <div class="program-card">
+          <div class="program-head"><div class="list-icon bg-red"><i class="fa-solid fa-heart-pulse"></i></div><span class="badge badge-secondary">Completed</span></div>
+          <h4>Blood Donation Drive</h4>
+          <div class="program-meta">
+            <span><i class="fa-solid fa-calendar"></i> Feb 18, 2025</span>
+            <span><i class="fa-solid fa-location-dot"></i> Gymnasium</span>
+            <span><i class="fa-solid fa-users"></i> 156 donors</span>
+          </div>
+          <div class="program-foot">
+            <button class="btn btn-outline btn-sm" data-toast="Opening program report" data-toast-type="info"><i class="fa-solid fa-chart-simple"></i> Report</button>
+          </div>
+        </div>
+        <div class="program-card">
+          <div class="program-head"><div class="list-icon bg-green"><i class="fa-solid fa-clipboard-check"></i></div><span class="badge badge-secondary">Completed</span></div>
+          <h4>Annual Physical Examination</h4>
+          <div class="program-meta">
+            <span><i class="fa-solid fa-calendar"></i> Jan 15 - 30, 2025</span>
+            <span><i class="fa-solid fa-location-dot"></i> Clinic</span>
+            <span><i class="fa-solid fa-users"></i> 1,102 examined</span>
+          </div>
+          <div class="program-foot">
+            <button class="btn btn-outline btn-sm" data-toast="Opening program report" data-toast-type="info"><i class="fa-solid fa-chart-simple"></i> Report</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Create Program Modal -->
+      <div class="modal-overlay" id="programModal">
+        <div class="modal modal-lg">
+          <div class="modal-header">
+            <h3 class="modal-title"><i class="fa-solid fa-heart-pulse"></i> Create Health Program</h3>
+            <button class="modal-close" data-modal-close><i class="fa-solid fa-xmark"></i></button>
+          </div>
+          <form class="js-demo-form" data-toast="Health program created">
+            <div class="modal-body">
+              <div class="form-group"><label class="form-label">Program Title <span class="req">*</span></label><input type="text" class="form-control" placeholder="e.g. Anti-Dengue Vaccination Drive" required></div>
+              <div class="form-row">
+                <div class="form-group"><label class="form-label">Program Type <span class="req">*</span></label>
+                  <select class="form-control" required><option value="">Select type</option><option>Vaccination</option><option>Seminar</option><option>Screening</option><option>Dental</option><option>Wellness</option></select>
+                </div>
+                <div class="form-group"><label class="form-label">Target Participants</label>
+                  <select class="form-control"><option>All Students</option><option>By Department</option><option>By Year Level</option><option>Staff Only</option></select>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group"><label class="form-label">Start Date <span class="req">*</span></label><input type="date" class="form-control" required></div>
+                <div class="form-group"><label class="form-label">End Date</label><input type="date" class="form-control"></div>
+              </div>
+              <div class="form-group"><label class="form-label">Venue <span class="req">*</span></label><input type="text" class="form-control" placeholder="e.g. Gymnasium" required></div>
+              <div class="form-group"><label class="form-label">Description</label><textarea class="form-control" placeholder="Program details..."></textarea></div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-outline" data-modal-close>Cancel</button>
+              <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Create Program</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+<script src="../js/master.js"></script>
+</body>
+</html>

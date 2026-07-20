@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Health Programs | AlagaGo Clinic</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="../css/master.css">
+  <script src="/session-guard.js"></script>
+</head>
+<body>
+<div class="app">
+  <!-- ===== Sidebar ===== -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <div class="brand-icon"><i class="fa-solid fa-staff-snake"></i></div>
+      <div class="brand-text"><strong>AlagaGo</strong><small>Student Portal</small></div>
+    </div>
+    <nav class="sidebar-nav">
+      <span class="nav-label">Main</span>
+        <a href="index.html" class="nav-link"><i class="fa-solid fa-gauge-high"></i><span>Dashboard</span></a>
+      <span class="nav-label">Health</span>
+        <a href="records.html" class="nav-link"><i class="fa-solid fa-file-medical"></i><span>My Medical Record</span></a>
+        <a href="medicines.html" class="nav-link"><i class="fa-solid fa-capsules"></i><span>My Medicines</span></a>
+        <a href="clearance.html" class="nav-link"><i class="fa-solid fa-file-circle-check"></i><span>Health Clearance</span></a>
+      <span class="nav-label">Services</span>
+        <a href="appointments.html" class="nav-link"><i class="fa-solid fa-calendar-check"></i><span>Appointments</span></a>
+        <a href="incidents.html" class="nav-link"><i class="fa-solid fa-file-circle-exclamation"></i><span>Incident History</span></a>
+        <a href="programs.html" class="nav-link"><i class="fa-solid fa-heart-pulse"></i><span>Health Programs</span></a>
+      <span class="nav-label">Account</span>
+        <a href="profile.html" class="nav-link"><i class="fa-solid fa-user"></i><span>My Profile</span></a>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="#" onclick="logout(); return false;" class="dropdown-item text-danger">
+        <i class="fa-solid fa-arrow-right-from-bracket"></i> Log Out
+      </a>
+    </div>
+  </aside>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+  <!-- ===== Main ===== -->
+  <div class="main">
+  <!-- ===== Topbar ===== -->
+  <header class="topbar">
+    <button class="icon-btn" id="sidebarToggle"><i class="fa-solid fa-bars"></i></button>
+    <div class="search-box">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <input type="text" placeholder="Search programs..." data-table-search="mainTable">
+    </div>
+    <div class="topbar-actions">
+      <div class="dropdown">
+        <button class="icon-btn" data-dropdown-toggle="notifDropdown"><i class="fa-solid fa-bell"></i><span class="dot"></span></button>
+        <div class="dropdown-menu dropdown-menu-wide" id="notifDropdown">
+          <div class="dropdown-head">Notifications</div>
+          <a href="#" class="dropdown-item"><i class="fa-solid fa-calendar-check"></i> New appointment booked</a>
+          <a href="#" class="dropdown-item"><i class="fa-solid fa-pills"></i> Low stock alert: Paracetamol</a>
+          <a href="#" class="dropdown-item"><i class="fa-solid fa-file-circle-check"></i> 3 clearance requests pending</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button class="user-chip" data-dropdown-toggle="userDropdown">
+          <span class="avatar">MC</span>
+          <span class="user-meta"><strong>Maria Clara</strong><small>Student - BSIT 3rd Year</small></span>
+          <i class="fa-solid fa-chevron-down"></i>
+        </button>
+        <div class="dropdown-menu" id="userDropdown">
+          <a href="profile.html" class="dropdown-item"><i class="fa-solid fa-user"></i> My Profile</a>
+          <a href="#" class="dropdown-item"><i class="fa-solid fa-gear"></i> Preferences</a>
+          <div class="dropdown-divider"></div>
+          <a href="#" onclick="logout(); return false;" class="dropdown-item text-danger">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i> Log Out
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+    <main class="content">
+
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">Health Programs</h1>
+          <p class="page-subtitle">Programs you have joined and new ones you can join.</p>
+        </div>
+      </div>
+
+      <!-- Joined -->
+      <div class="card">
+        <div class="card-header"><h3 class="card-title"><i class="fa-solid fa-circle-check"></i> My Programs</h3></div>
+        <div class="card-body">
+          <div class="grid-3">
+            <div class="program-card">
+              <div class="program-head"><div class="list-icon bg-teal"><i class="fa-solid fa-syringe"></i></div><span class="badge badge-success">Joined</span></div>
+              <h4>Anti-Dengue Vaccination Drive</h4>
+              <div class="program-meta">
+                <span><i class="fa-solid fa-calendar"></i> Mar 03 - 14, 2025</span>
+                <span><i class="fa-solid fa-location-dot"></i> Clinic &mdash; Room 1</span>
+              </div>
+              <div class="program-foot"><button class="btn btn-outline btn-sm" data-toast="Opening your schedule" data-toast-type="info"><i class="fa-solid fa-calendar"></i> View Schedule</button></div>
+            </div>
+            <div class="program-card">
+              <div class="program-head"><div class="list-icon bg-amber"><i class="fa-solid fa-weight-scale"></i></div><span class="badge badge-success">Joined</span></div>
+              <h4>BMI &amp; Nutrition Screening</h4>
+              <div class="program-meta">
+                <span><i class="fa-solid fa-calendar"></i> Mar 10 - 21, 2025</span>
+                <span><i class="fa-solid fa-location-dot"></i> Clinic Lobby</span>
+              </div>
+              <div class="program-foot"><button class="btn btn-outline btn-sm" data-toast="Opening your schedule" data-toast-type="info"><i class="fa-solid fa-calendar"></i> View Schedule</button></div>
+            </div>
+            <div class="program-card">
+              <div class="program-head"><div class="list-icon bg-green"><i class="fa-solid fa-clipboard-check"></i></div><span class="badge badge-secondary">Completed</span></div>
+              <h4>Annual Physical Examination</h4>
+              <div class="program-meta">
+                <span><i class="fa-solid fa-calendar"></i> Jan 15 - 30, 2025</span>
+                <span><i class="fa-solid fa-location-dot"></i> Clinic</span>
+              </div>
+              <div class="program-foot"><button class="btn btn-outline btn-sm" data-toast="Certificate downloaded"><i class="fa-solid fa-download"></i> Certificate</button></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Available -->
+      <div class="card">
+        <div class="card-header"><h3 class="card-title"><i class="fa-solid fa-heart-pulse"></i> Available to Join</h3></div>
+        <div class="card-body">
+          <div class="grid-3">
+            <div class="program-card">
+              <div class="program-head"><div class="list-icon bg-purple"><i class="fa-solid fa-brain"></i></div><span class="badge badge-info">Upcoming</span></div>
+              <h4>Mental Health Awareness Seminar</h4>
+              <div class="program-meta">
+                <span><i class="fa-solid fa-calendar"></i> Mar 20, 2025 &middot; 1:00 PM</span>
+                <span><i class="fa-solid fa-location-dot"></i> AVR Hall</span>
+                <span><i class="fa-solid fa-users"></i> Open to all students</span>
+              </div>
+              <div class="program-foot"><button class="btn btn-primary btn-sm" data-toast="You joined Mental Health Awareness Seminar"><i class="fa-solid fa-plus"></i> Join Program</button></div>
+            </div>
+            <div class="program-card">
+              <div class="program-head"><div class="list-icon bg-blue"><i class="fa-solid fa-tooth"></i></div><span class="badge badge-info">Upcoming</span></div>
+              <h4>Free Dental Check-up</h4>
+              <div class="program-meta">
+                <span><i class="fa-solid fa-calendar"></i> Mar 25 - 27, 2025</span>
+                <span><i class="fa-solid fa-location-dot"></i> Dental Room</span>
+                <span><i class="fa-solid fa-users"></i> 280 registered</span>
+              </div>
+              <div class="program-foot"><button class="btn btn-primary btn-sm" data-toast="You joined Free Dental Check-up"><i class="fa-solid fa-plus"></i> Join Program</button></div>
+            </div>
+            <div class="program-card">
+              <div class="program-head"><div class="list-icon bg-red"><i class="fa-solid fa-heart-pulse"></i></div><span class="badge badge-info">Upcoming</span></div>
+              <h4>Blood Donation Drive (April)</h4>
+              <div class="program-meta">
+                <span><i class="fa-solid fa-calendar"></i> Apr 08, 2025</span>
+                <span><i class="fa-solid fa-location-dot"></i> Gymnasium</span>
+                <span><i class="fa-solid fa-users"></i> Open to all students</span>
+              </div>
+              <div class="program-foot"><button class="btn btn-primary btn-sm" data-toast="You joined Blood Donation Drive"><i class="fa-solid fa-plus"></i> Join Program</button></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+<script src="../js/master.js"></script>
+</body>
+</html>
++

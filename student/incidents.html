@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Incident History | AlagaGo Clinic</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="../css/master.css">
+  <script src="/session-guard.js"></script>
+
+</head>
+<body>
+<div class="app">
+  <!-- ===== Sidebar ===== -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <div class="brand-icon"><i class="fa-solid fa-staff-snake"></i></div>
+      <div class="brand-text"><strong>AlagaGo</strong><small>Student Portal</small></div>
+    </div>
+    <nav class="sidebar-nav">
+      <span class="nav-label">Main</span>
+        <a href="index.html" class="nav-link"><i class="fa-solid fa-gauge-high"></i><span>Dashboard</span></a>
+      <span class="nav-label">Health</span>
+        <a href="records.html" class="nav-link"><i class="fa-solid fa-file-medical"></i><span>My Medical Record</span></a>
+        <a href="medicines.html" class="nav-link"><i class="fa-solid fa-capsules"></i><span>My Medicines</span></a>
+        <a href="clearance.html" class="nav-link"><i class="fa-solid fa-file-circle-check"></i><span>Health Clearance</span></a>
+      <span class="nav-label">Services</span>
+        <a href="appointments.html" class="nav-link"><i class="fa-solid fa-calendar-check"></i><span>Appointments</span></a>
+        <a href="incidents.html" class="nav-link"><i class="fa-solid fa-file-circle-exclamation"></i><span>Incident History</span></a>
+        <a href="programs.html" class="nav-link"><i class="fa-solid fa-heart-pulse"></i><span>Health Programs</span></a>
+      <span class="nav-label">Account</span>
+        <a href="profile.html" class="nav-link"><i class="fa-solid fa-user"></i><span>My Profile</span></a>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="#" onclick="logout(); return false;" class="dropdown-item text-danger">
+        <i class="fa-solid fa-arrow-right-from-bracket"></i> Log Out
+      </a>
+    </div>
+  </aside>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+  <!-- ===== Main ===== -->
+  <div class="main">
+  <!-- ===== Topbar ===== -->
+  <header class="topbar">
+    <button class="icon-btn" id="sidebarToggle"><i class="fa-solid fa-bars"></i></button>
+    <div class="search-box">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <input type="text" placeholder="Search incidents..." data-table-search="mainTable">
+    </div>
+    <div class="topbar-actions">
+      <div class="dropdown">
+        <button class="icon-btn" data-dropdown-toggle="notifDropdown"><i class="fa-solid fa-bell"></i><span class="dot"></span></button>
+        <div class="dropdown-menu dropdown-menu-wide" id="notifDropdown">
+          <div class="dropdown-head">Notifications</div>
+          <a href="#" class="dropdown-item"><i class="fa-solid fa-calendar-check"></i> New appointment booked</a>
+          <a href="#" class="dropdown-item"><i class="fa-solid fa-pills"></i> Low stock alert: Paracetamol</a>
+          <a href="#" class="dropdown-item"><i class="fa-solid fa-file-circle-check"></i> 3 clearance requests pending</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button class="user-chip" data-dropdown-toggle="userDropdown">
+          <span class="avatar">MC</span>
+          <span class="user-meta"><strong>Maria Clara</strong><small>Student - BSIT 3rd Year</small></span>
+          <i class="fa-solid fa-chevron-down"></i>
+        </button>
+        <div class="dropdown-menu" id="userDropdown">
+          <a href="profile.html" class="dropdown-item"><i class="fa-solid fa-user"></i> My Profile</a>
+          <a href="#" class="dropdown-item"><i class="fa-solid fa-gear"></i> Preferences</a>
+          <div class="dropdown-divider"></div>
+          <a href="#" onclick="logout(); return false;" class="dropdown-item text-danger">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i> Log Out
+          </a>
+      </div>
+    </div>
+  </header>
+    <main class="content">
+
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">Incident History</h1>
+          <p class="page-subtitle">Incidents you have reported or been involved in.</p>
+        </div>
+        <div class="page-actions">
+          <button class="btn btn-danger" data-modal-open="incidentModal"><i class="fa-solid fa-triangle-exclamation"></i> Report Incident</button>
+        </div>
+      </div>
+
+      <div class="alert alert-info">
+        <i class="fa-solid fa-circle-info"></i>
+        <div><strong>In an emergency?</strong> Proceed immediately to the clinic or contact the campus emergency hotline at <strong>0917 123 4567</strong>.</div>
+      </div>
+
+      <div class="card">
+        <div class="table-wrap">
+          <table class="table" id="mainTable">
+            <thead><tr><th>Incident ID</th><th>Type</th><th>Location</th><th>Date Reported</th><th>Severity</th><th>Status</th><th>Remarks</th></tr></thead>
+            <tbody>
+              <tr><td class="fw-bold">INC-0098</td><td>Minor Accident</td><td>PE Area</td><td>Feb 20, 2025</td><td><span class="badge badge-success">Minor</span></td><td><span class="badge badge-success">Resolved</span></td><td>Treated with cold compress</td></tr>
+              <tr><td class="fw-bold">INC-0076</td><td>Sudden Illness</td><td>Room 204</td><td>Jan 15, 2025</td><td><span class="badge badge-warning">Moderate</span></td><td><span class="badge badge-success">Resolved</span></td><td>Referred to physician</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Report Incident Modal -->
+      <div class="modal-overlay" id="incidentModal">
+        <div class="modal modal-lg">
+          <div class="modal-header">
+            <h3 class="modal-title"><i class="fa-solid fa-triangle-exclamation"></i> Report an Incident</h3>
+            <button class="modal-close" data-modal-close><i class="fa-solid fa-xmark"></i></button>
+          </div>
+          <form class="js-demo-form" data-toast="Incident report submitted">
+            <div class="modal-body">
+              <div class="form-row">
+                <div class="form-group"><label class="form-label">Incident Type <span class="req">*</span></label>
+                  <select class="form-control" required><option value="">Select type</option><option>Sports Injury</option><option>Minor Accident</option><option>Sudden Illness</option><option>Food Poisoning</option><option>Other</option></select>
+                </div>
+                <div class="form-group"><label class="form-label">Date of Incident <span class="req">*</span></label><input type="date" class="form-control" required></div>
+              </div>
+              <div class="form-group"><label class="form-label">Location <span class="req">*</span></label><input type="text" class="form-control" placeholder="e.g. Covered Court" required></div>
+              <div class="form-group"><label class="form-label">Description <span class="req">*</span></label><textarea class="form-control" placeholder="Describe what happened..." required></textarea></div>
+              <div class="form-group"><label class="form-label">Witnesses (optional)</label><input type="text" class="form-control" placeholder="Names of witnesses, if any"></div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-outline" data-modal-close>Cancel</button>
+              <button type="submit" class="btn btn-danger"><i class="fa-solid fa-paper-plane"></i> Submit Report</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+<script src="../js/master.js"></script>
+</body>
+</html>
